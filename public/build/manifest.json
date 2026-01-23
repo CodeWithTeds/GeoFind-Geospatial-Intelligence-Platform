@@ -1,13 +1,24 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-B4mRFQdl.css",
+    "file": "assets/app-BA8EznxP.css",
     "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/landing.css": {
+    "file": "assets/landing-DOJO1Zu8.css",
+    "src": "resources/css/landing.css",
     "isEntry": true
   },
   "resources/js/app.js": {
     "file": "assets/app-CAiCLEjY.js",
     "name": "app",
     "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/landing.js": {
+    "file": "assets/landing-Cetfc1X_.js",
+    "name": "landing",
+    "src": "resources/js/landing.js",
     "isEntry": true
   }
 }
