@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>JerksHead</title>
-    <!-- Static assets replacing Vite -->
-    <link href="/src/style.css" rel="stylesheet">  
+     <script src="https://cdn.tailwindcss.com"></script>
     <!-- CesiumJS -->
     <script src="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Cesium.js"></script>
     <link href="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
