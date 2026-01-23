@@ -63,7 +63,7 @@
 <body class="h-screen w-screen overflow-hidden relative font-sans">
     <!-- Background Image -->
     <div class="absolute inset-0 z-0">
-        <img src="{{ asset('images/findjerks.png') }}" alt="Background" class="w-full h-full object-cover">
+        <img src="{{ asset('images/findjerks_opt.jpg') }}?v={{ filemtime(public_path('images/findjerks_opt.jpg')) }}" alt="Background" class="w-full h-full object-cover" fetchpriority="high">
         <!-- Dark gradient overlay for better text readability if needed -->
         <div class="absolute inset-0 bg-black/10"></div>
     </div>
@@ -103,7 +103,7 @@
         <!-- Footer / Logo -->
         <footer class="flex justify-center pb-4 md:pb-8">
             <div class="transform hover:scale-105 transition-transform duration-300 cursor-pointer">
-                <img src="{{ asset('images/title.png') }}" alt="JERKSHEAD" class="h-20 md:h-28 lg:h-32 object-contain drop-shadow-2xl">
+                <img src="{{ asset('images/title_opt.png') }}?v={{ filemtime(public_path('images/title_opt.png')) }}" alt="JERKSHEAD" class="h-20 md:h-28 lg:h-32 object-contain drop-shadow-2xl" loading="lazy">
             </div>
         </footer>
 
