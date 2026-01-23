@@ -6,9 +6,7 @@
 // Static Configuration / Data
 const CONFIG = {
     hotels: [
-        { name: "Manila Hotel", lat: 14.5960, lon: 120.9720 },
-        { name: "Rizal Park Hotel", lat: 14.5820, lon: 120.9760 },
-        { name: "Sofitel", lat: 14.5550, lon: 120.9810 },
+        { name: "Prof Alex The GOAT", lat: 14.5960, lon: 120.9720 },
     ],
     camera: {
         longitude: 120.9842,
