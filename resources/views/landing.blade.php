@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>JerksHead</title>
     <!-- Static assets replacing Vite -->
-    <link rel="stylesheet" href="{{ asset('build/assets/app-B4mRFQdl.css') }}">
-    <script type="module" src="{{ asset('build/assets/app-CAiCLEjY.js') }}"></script>
-    
+    <link href="/src/style.css" rel="stylesheet">  
     <!-- CesiumJS -->
     <script src="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Cesium.js"></script>
     <link href="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
