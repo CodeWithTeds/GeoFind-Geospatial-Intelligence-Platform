@@ -85,10 +85,8 @@ function initGameLogic() {
     // Start Game
     if (elements.startBtn && elements.mapContainer) {
         elements.startBtn.addEventListener('click', () => {
-            if (!isMobileDevice()) {
-                alert('This feature is designed for mobile devices. Please switch to a mobile device or reduce your window size to experience it.');
-                if (window.innerWidth > 768) return;
-            }
+            // Mobile check removed to allow desktop access as per request
+            // if (!isMobileDevice()) { ... }
 
             elements.modal.classList.add('hidden');
             elements.modal.classList.remove('flex');
