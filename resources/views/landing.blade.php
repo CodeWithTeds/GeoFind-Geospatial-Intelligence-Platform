@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>JerksHead</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Static assets replacing Vite -->
+    <link rel="stylesheet" href="{{ asset('build/assets/app-B4mRFQdl.css') }}">
+    <script type="module" src="{{ asset('build/assets/app-CAiCLEjY.js') }}"></script>
     
     <!-- CesiumJS -->
     <script src="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Cesium.js"></script>
