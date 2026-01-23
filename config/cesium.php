@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'access_token' => env('CESIUM_ACCESS_TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMjdkNzJlYi00MTlkLTRiMjYtYmY4ZS1kN2E4NTRmZTUyNDciLCJpZCI6MzI1Mjk3LCJpYXQiOjE3NTM0Njg0ODN9._PQOBRA5buM2PVh1mUWc5YsWNbKH-jmR_C0O4PFocXQ'),
+    'access_token' => env('CESIUM_TOKEN'),
 ];

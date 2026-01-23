@@ -137,18 +137,9 @@ function initializeMap() {
 
     Cesium.Ion.defaultAccessToken = cesiumToken;
 
+    // Initialize Cesium Viewer with default widgets enabled (matches Cesium Viewer demo)
     const viewer = new Cesium.Viewer('cesiumContainer', {
-        terrain: Cesium.Terrain.fromWorldTerrain(),
-        infoBox: false,
-        selectionIndicator: false,
-        timeline: false,
-        animation: false,
-        baseLayerPicker: false,
-        geocoder: false,
-        homeButton: false,
-        sceneModePicker: false,
-        navigationHelpButton: false,
-        fullscreenButton: false
+        terrain: Cesium.Terrain.fromWorldTerrain()
     });
 
     // Load 3D Tiles
