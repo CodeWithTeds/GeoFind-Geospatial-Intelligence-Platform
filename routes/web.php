@@ -51,10 +51,13 @@ Route::prefix('admin')->group(function () {
 
     // Admin Dashboard (Protected)
     Route::middleware('auth')->group(function () {
-        Route::get('dashboard', function () {
-            return view('admin.dashboard');
-        })->name('admin.dashboard');
+        Route::get('dashboard', \App\Livewire\Admin\Dashboard::class)->name('admin.dashboard');
 
-        Route::resource('questions', \App\Http\Controllers\Admin\QuestionController::class)->names('admin.questions');
+        // Questions CRUD (Livewire SPA)
+        Route::prefix('questions')->name('admin.questions.')->group(function () {
+            Route::get('/', \App\Livewire\Admin\Questions\Index::class)->name('index');
+            Route::get('/create', \App\Livewire\Admin\Questions\Create::class)->name('create');
+            Route::get('/{id}/edit', \App\Livewire\Admin\Questions\Edit::class)->name('edit');
+        });
     });
 });

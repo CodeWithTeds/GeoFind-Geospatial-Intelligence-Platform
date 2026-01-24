@@ -106,21 +106,24 @@ class RadiusService
         }
     }
 
+    public function createHotelGeofenceVisualization(int $pointId, float $radius, string $shapeType = 'all'): array
+    {
+        // Reuse the findHotelsInRadius logic to get the data
+        $data = $this->findHotelsInRadius($pointId, $radius);
+        
+        // Add visualization specific data
+        $data['visualization'] = [
+            'shape_type' => $shapeType,
+            'enabled' => true
+        ];
+        
+        return $data;
+    }
+
     public function createGeofence(int $pointId, int $centerPoint, float $radius): array
     {
-        try {
-            $this->validationService->validateRadius($radius);
-
-            $point = Location::findorFail($pointId);
-            $centerPoint = Location::findOrFail($centerPoint);
-
-            $distanceResult = $this->geometricService->calculateDistance($centerPoint, $point);
-        } catch (Throwable $e) {
-            log::error(
-                '',
-                []
-            );
-        }
+        // Placeholder for future implementation
+        return []; 
     }
 
     protected function processElementsData(array $elements, Location $centerPoint, float $radius, string $defaultName = 'Unnamed POI'): array
