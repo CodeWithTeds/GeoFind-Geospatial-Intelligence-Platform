@@ -158,6 +158,40 @@ function initializeMap() {
 
     addHotelsToMap(viewer, CONFIG.hotels);
 
+    // Add click handler for pinning location
+    viewer.screenSpaceEventHandler.setInputAction(function(click) {
+        const cartesian = viewer.scene.pickPosition(click.position);
+        if (cartesian) {
+            const cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+            const longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(6);
+            const latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(6);
+
+            console.log(`Pinned Location: Lat ${latitudeString}, Lon ${longitudeString}`);
+
+            // Add a pin at the clicked location
+            viewer.entities.add({
+                position: cartesian,
+                point: {
+                    pixelSize: 10,
+                    color: Cesium.Color.YELLOW,
+                    outlineColor: Cesium.Color.BLACK,
+                    outlineWidth: 2,
+                    heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
+                },
+                label: {
+                    text: `Lat: ${latitudeString}, Lon: ${longitudeString}`,
+                    font: '12pt monospace',
+                    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                    outlineWidth: 2,
+                    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+                    pixelOffset: new Cesium.Cartesian2(0, -10),
+                    heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+                    disableDepthTestDistance: Number.POSITIVE_INFINITY
+                }
+            });
+        }
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
     return viewer;
 }
 
