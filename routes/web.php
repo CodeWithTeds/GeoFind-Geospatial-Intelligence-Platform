@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LandingController;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Admin\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,3 +40,17 @@ Route::post('/calculate-convex-hull', [LocationController::class, 'calculateConv
 Route::post('/generate-grid', [LocationController::class, 'generateGrid'])->name('locations.generate-grid');
 Route::post('/generate-heatmap', [LocationController::class, 'generateLocationHeatmap'])->name('locations.generate-heatmap');
 Route::post('/find-location-clusters', [LocationController::class, 'findLocationClusters'])->name('locations.find-location-clusters');
+
+// Admin Auth Routes
+Route::prefix('admin')->group(function () {
+    Route::get('login', [LoginController::class, 'create'])->name('admin.login');
+    Route::post('login', [LoginController::class, 'store'])
+        ->middleware('throttle:login')
+        ->name('admin.login.store');
+    Route::post('logout', [LoginController::class, 'destroy'])->name('admin.logout');
+
+    // Admin Dashboard (Protected)
+    Route::middleware('auth')->get('dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+});
