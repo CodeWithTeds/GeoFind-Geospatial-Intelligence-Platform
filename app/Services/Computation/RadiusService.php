@@ -90,7 +90,6 @@ class RadiusService
                     'processed_count' => count($pois),
                     'turbo_url' => $turboUrl,
                 ],
-                'cesium_token' => config('cesium.access_token'),
             ];
         } catch (Throwable $e) {
             Log::error('Error finding POIs in radius', [
@@ -228,7 +227,6 @@ class RadiusService
                     'query' => $query,
                     'processed_count' => count($hotels)
                 ],
-                'cesium_token' => config('cesium.access_token'),
             ];
         } catch (\Throwable $e) {
             Log::error('Error finding hotels in radius', [

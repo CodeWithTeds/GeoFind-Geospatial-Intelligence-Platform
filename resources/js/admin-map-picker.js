@@ -2,7 +2,6 @@
 export function initAdminMapPicker(config) {
     const {
         containerId,
-        accessToken,
         initialLat,
         initialLng,
         onLocationPicked,
@@ -14,11 +13,15 @@ export function initAdminMapPicker(config) {
         return;
     }
 
-    Cesium.Ion.defaultAccessToken = accessToken;
+    // Use our backend proxy for Cesium Ion requests
+    Cesium.Ion.defaultServer = window.location.origin + '/api/cesium/';
+    Cesium.Ion.defaultAccessToken = 'token-secured-by-backend-proxy';
 
     const viewer = new Cesium.Viewer(containerId, {
         terrain: Cesium.Terrain.fromWorldTerrain(),
-        baseLayerPicker: true, // Enabled as requested
+        // Explicitly use Bing Maps Aerial (Asset ID 2) via our Proxy
+        imageryProvider: new Cesium.IonImageryProvider({ assetId: 2 }),
+        baseLayerPicker: true, 
         geocoder: true,
         animation: false,
         timeline: false,

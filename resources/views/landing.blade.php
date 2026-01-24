@@ -95,10 +95,8 @@
     <!-- Global App Config -->
     <script>
         window.AppConfig = {
-            cesium: {
-                token: "{{ config('cesium.access_token') }}"
-            }
-        };
+            // cesium token removed for security
+        }
     </script>
 </body>
 </html>

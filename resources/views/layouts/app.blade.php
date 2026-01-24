@@ -65,10 +65,14 @@
             }
             container.innerHTML = ''; // Clear previous content
 
-            Cesium.Ion.defaultAccessToken = data.cesium_token;
+            // Use our backend proxy for Cesium Ion requests
+            Cesium.Ion.defaultServer = window.location.origin + '/api/cesium/';
+            // Set placeholder token to silence client-side warnings (real token is on server)
+            Cesium.Ion.defaultAccessToken = 'token-secured-by-backend-proxy';
 
             cesiumViewer = new Cesium.Viewer(containerId, {
                 terrain: Cesium.Terrain.fromWorldTerrain(),
+                imageryProvider: new Cesium.IonImageryProvider({ assetId: 2 }), // Use Proxy for Bing Maps
                 infoBox: false, // Disable the default info box
                 selectionIndicator: false // Disable the default selection indicator
             });

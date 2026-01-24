@@ -63,7 +63,6 @@
                     class="bg-gray-100 relative transition-all duration-300"
                     :class="isExpanded ? 'w-full h-full' : 'w-full h-[500px] rounded-lg'"
                     x-data="questionMap({
-                        accessToken: '{{ config('cesium.access_token') }}',
                         initialLat: @json($answer_latitude),
                         initialLng: @json($answer_longitude),
                         tilesetId: 96188

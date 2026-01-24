@@ -13,7 +13,6 @@ const registerMapComponent = () => {
             // Use Alpine's $wire to communicate with Livewire
             initAdminMapPicker({
                 containerId: this.$el.id,
-                accessToken: config.accessToken,
                 initialLat: config.initialLat,
                 initialLng: config.initialLng,
                 tilesetId: config.tilesetId,

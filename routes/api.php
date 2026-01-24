@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\Api\QuestionController;
+use App\Http\Controllers\CesiumProxyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,13 @@ use App\Http\Controllers\Api\QuestionController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+// Cesium Proxy Routes (Rate Limited)
+Route::prefix('cesium')->middleware(['throttle:60,1'])->group(function () {
+    Route::get('/v1/assets/{assetId}/endpoint', [CesiumProxyController::class, 'getAssetEndpoint']);
+    Route::get('/v1/geocode/search', [CesiumProxyController::class, 'geocode']);
+    Route::get('/v1/geocode/autocomplete', [CesiumProxyController::class, 'geocodeAutocomplete']);
 });
 
 // Location Routes

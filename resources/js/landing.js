@@ -2,6 +2,7 @@
  * Landing Page Logic
  * Handles 3D map initialization, modal interactions, and mobile detection.
  */
+import './cesium-config';
 
 // Static Configuration / Data
 const CONFIG = {
@@ -125,19 +126,18 @@ function initializeMap() {
         return null;
     }
 
-    // Securely access configuration from window.AppConfig
-    const cesiumToken = window.AppConfig?.cesium?.token;
-
-    if (!cesiumToken) {
-        console.error('Cesium token is missing in AppConfig.');
-        return null;
-    }
-
-    Cesium.Ion.defaultAccessToken = cesiumToken;
+    // Use our backend proxy for Cesium Ion requests
+    Cesium.Ion.defaultServer = window.location.origin + '/api/cesium/';
 
     // Initialize Cesium Viewer with default widgets enabled (matches Cesium Viewer demo)
     const viewer = new Cesium.Viewer('cesiumContainer', {
-        terrain: Cesium.Terrain.fromWorldTerrain()
+        terrain: Cesium.Terrain.fromWorldTerrain(),
+        // Explicitly use Bing Maps Aerial (Asset ID 2) via our Proxy
+        imageryProvider: new Cesium.IonImageryProvider({ assetId: 2 }),
+        baseLayerPicker: true, 
+        geocoder: true,
+        animation: false,
+        timeline: false
     });
 
     // Load 3D Tiles
