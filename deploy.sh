@@ -9,6 +9,11 @@ echo "🚀 Starting deployment..."
 echo "📦 Installing Composer dependencies..."
 composer install --no-interaction --prefer-dist --optimize-autoloader
 
+# 1.5 Install NPM Dependencies and Build Assets
+echo "🎨 Building frontend assets..."
+npm install
+npm run build
+
 # 2. Run Database Migrations
 echo "🗄️  Running migrations..."
 php artisan migrate --force
