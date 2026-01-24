@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\Api\QuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +29,7 @@ Route::prefix('locations')->group(function () {
     Route::post('/find-points-in-radius', [LocationController::class, 'findPointInRadius']);
     Route::post('/to-geohash', [LocationController::class, 'toGeohash']);
     Route::get('/{location}/address', [LocationController::class, 'getAddress']);
-}); 
+});
+
+// Question Routes
+Route::apiResource('questions', QuestionController::class);

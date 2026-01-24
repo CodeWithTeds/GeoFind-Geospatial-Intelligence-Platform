@@ -50,7 +50,11 @@ Route::prefix('admin')->group(function () {
     Route::post('logout', [LoginController::class, 'destroy'])->name('admin.logout');
 
     // Admin Dashboard (Protected)
-    Route::middleware('auth')->get('dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    Route::middleware('auth')->group(function () {
+        Route::get('dashboard', function () {
+            return view('admin.dashboard');
+        })->name('admin.dashboard');
+
+        Route::resource('questions', \App\Http\Controllers\Admin\QuestionController::class)->names('admin.questions');
+    });
 });

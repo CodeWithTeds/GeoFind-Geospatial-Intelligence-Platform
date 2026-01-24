@@ -6,26 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - JerksHead</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
 
-<body class="bg-gray-900 text-white h-screen flex items-center justify-center">
+<body class="bg-gray-50 text-gray-800 h-screen flex items-center justify-center">
 
-    <div class="w-full max-w-md bg-gray-800 p-8 rounded-lg shadow-2xl border border-gray-700">
+    <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-lg border border-gray-100">
         <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-yellow-500">Admin Panel</h1>
-            <p class="text-gray-400 mt-2">Sign in to your account</p>
+            <h1 class="text-3xl font-bold text-gray-900">Admin Panel</h1>
+            <p class="text-gray-500 mt-2">Sign in to your account</p>
         </div>
 
         <!-- Session Status -->
         @if (session('status'))
-        <div class="mb-4 font-medium text-sm text-green-400 text-center">
+        <div class="mb-4 font-medium text-sm text-green-600 text-center bg-green-50 p-2 rounded-md">
             {{ session('status') }}
         </div>
         @endif
 
         <!-- Validation Errors -->
         @if ($errors->any())
-        <div class="mb-4 bg-red-900/50 border border-red-500 text-red-200 px-4 py-3 rounded relative" role="alert">
+        <div class="mb-4 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg relative" role="alert">
             <ul class="list-disc list-inside text-sm">
                 @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -39,37 +45,42 @@
 
             <!-- Email Address -->
             <div class="mb-4">
-                <label for="email" class="block text-gray-300 text-sm font-bold mb-2">Email</label>
+                <label for="email" class="block text-gray-700 text-sm font-semibold mb-2">Email</label>
                 <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
-                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition duration-200 placeholder-gray-500"
+                    class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 placeholder-gray-400 shadow-sm"
                     placeholder="admin@example.com">
             </div>
 
             <!-- Password -->
             <div class="mb-6">
-                <label for="password" class="block text-gray-300 text-sm font-bold mb-2">Password</label>
+                <label for="password" class="block text-gray-700 text-sm font-semibold mb-2">Password</label>
                 <input id="password" type="password" name="password" required
-                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition duration-200 placeholder-gray-500"
+                    class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 placeholder-gray-400 shadow-sm"
                     placeholder="••••••••">
             </div>
 
             <!-- Remember Me -->
             <div class="block mb-6">
                 <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" name="remember" class="rounded bg-gray-700 border-gray-600 text-yellow-500 shadow-sm focus:ring-yellow-500">
-                    <span class="ml-2 text-sm text-gray-400">Remember me</span>
+                    <input id="remember_me" type="checkbox" name="remember" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
                 </label>
             </div>
 
             <div class="flex items-center justify-between">
-                <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 transform hover:scale-[1.02]">
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 shadow-md transform hover:-translate-y-0.5">
                     Log in
                 </button>
             </div>
         </form>
 
-        <div class="mt-6 text-center">
-            <a href="/" class="text-sm text-gray-500 hover:text-gray-300 underline">Back to Landing</a>
+        <div class="mt-8 text-center border-t border-gray-100 pt-6">
+            <a href="/" class="text-sm text-gray-500 hover:text-blue-600 transition-colors duration-200 flex items-center justify-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back to Landing
+            </a>
         </div>
     </div>
 
