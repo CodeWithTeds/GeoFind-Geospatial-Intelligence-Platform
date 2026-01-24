@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>JerksHead</title>
     
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -28,7 +31,7 @@
         
         <!-- Header / Top Left Button -->
         <header class="flex justify-start">
-            <button id="play-now-btn" aria-label="Play Now" class="group relative bg-black/80 text-white px-8 py-3 rounded-full font-bold border-2 border-yellow-500/50 hover:bg-black hover:border-yellow-400 transition-all duration-300 shadow-lg flex items-center gap-3 overflow-hidden">
+            <button id="play-now-btn" aria-label="Play Now" onclick="Livewire.dispatch('open-instruction-overlay')" class="group relative bg-black/80 text-white px-8 py-3 rounded-full font-bold border-2 border-yellow-500/50 hover:bg-black hover:border-yellow-400 transition-all duration-300 shadow-lg flex items-center gap-3 overflow-hidden">
                 <span class="relative z-10 tracking-wider text-sm md:text-base">PLAY NOW!</span>
                 <span class="relative z-10 w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(250,204,21,0.8)]"></span>
                 
@@ -64,23 +67,7 @@
 
     </div>
 
-    <!-- Instruction Modal -->
-    <div id="instruction-modal" class="hidden fixed top-0 left-0 w-full h-full z-50 bg-black/85 items-center justify-center backdrop-blur-[5px]" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <div class="modal-content bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] border border-[#333] p-8 rounded-2xl max-w-[90%] w-[400px] text-center text-white shadow-[0_20px_50px_rgba(0,0,0,0.5)] modal-pop">
-            <h2 id="modal-title" class="text-2xl font-bold mb-4 text-yellow-400">Welcome!</h2>
-            <p class="mb-6 text-gray-300">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Welcome! Click Start to explore the 3D map. 
-                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-            <button id="start-game-btn" aria-label="Start Game" class="bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-3 px-8 rounded-full transition-colors duration-300 w-full">
-                START
-            </button>
-            <button id="close-modal-btn" aria-label="Cancel" class="mt-4 text-gray-500 hover:text-white text-sm underline">
-                Cancel
-            </button>
-        </div>
-    </div>
+
 
     <!-- Global App Config -->
     <script>
@@ -88,5 +75,7 @@
             // cesium token removed for security
         }
     </script>
+    
+    <livewire:instruction-overlay />
 </body>
 </html>
