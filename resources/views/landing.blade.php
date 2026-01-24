@@ -82,16 +82,6 @@
         </div>
     </div>
 
-    <!-- Fullscreen Map Container -->
-    <div id="game-map-container" class="hidden fixed top-0 left-0 w-full h-full z-[9999] bg-black">
-        <div id="cesiumContainer" class="w-full h-full"></div>
-        <button id="exit-map-btn" aria-label="Close Map" class="absolute top-4 left-4 z-50 bg-black/50 text-white p-2 rounded-full backdrop-blur-sm border border-white/20 hover:bg-black/80 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-        </button>
-    </div>
-
     <!-- Global App Config -->
     <script>
         window.AppConfig = {

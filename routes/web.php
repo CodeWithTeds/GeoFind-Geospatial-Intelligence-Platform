@@ -18,6 +18,10 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 
 Route::get('/', [LandingController::class, 'index']);
 
+Route::get('/play', function () {
+    return view('play');
+})->name('play');
+
 Route::resource('locations', LocationController::class);
 
 Route::post('/calculate-distance', [LocationController::class, 'calculateDistance'])->name('locations.calculate-distance');
