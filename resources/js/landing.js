@@ -5,7 +5,32 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     initPerspectiveText();
+    handleLoadingScreen();
 });
+
+/**
+ * Handles the loading screen fade out.
+ */
+function handleLoadingScreen() {
+    const loadingScreen = document.getElementById('loading-screen');
+    if (!loadingScreen) return;
+
+    // Minimum display time of 2.5 seconds to show off the slow animation
+    const minDisplayTime = 2500;
+    const startTime = Date.now();
+
+    window.addEventListener('load', () => {
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
+
+        setTimeout(() => {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.remove();
+            }, 500); // Wait for transition to finish
+        }, remainingTime);
+    });
+}
 
 /**
  * Initializes the 3D perspective text effect.
