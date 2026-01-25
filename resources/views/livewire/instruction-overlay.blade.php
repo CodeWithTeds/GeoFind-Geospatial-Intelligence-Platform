@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="order-2 flex justify-end">
-                    <img src="{{ asset('images/p5.png') }}" class="w-full md:w-3/5 rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.5)]" alt="Analyze The Clue">
+                    <img src="{{ asset('images/danvs.jpg') }}" class="w-full md:w-3/5 rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.5)]" alt="Analyze The Clue">
                 </div>
             </section>
 
