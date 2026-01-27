@@ -16,7 +16,7 @@
                 if (container) {
                     turnstile.render(container, {
                         sitekey: "{{ config('services.turnstile.key') }}",
-                        appearance: 'interaction-only',
+                        appearance: 'always',
                         callback: function(token) {
                             console.log('Turnstile challenge success');
                         },
