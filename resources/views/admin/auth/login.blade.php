@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://*.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://*.cloudflare.com https://challenges.cloudflare.com data:; frame-src https://*.cloudflare.com https://challenges.cloudflare.com; connect-src 'self' https://*.cloudflare.com https://challenges.cloudflare.com; img-src 'self' data:;">
     <title>Admin Login - JerksHead</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <x-turnstile.scripts />
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -71,7 +71,7 @@
 
             <!-- Turnstile Widget -->
             <div class="mb-6 flex justify-center">
-                <x-turnstile />
+                <div class="cf-turnstile" data-sitekey="{{ config('services.turnstile.key') }}"></div>
             </div>
 
             <div class="flex items-center justify-between">

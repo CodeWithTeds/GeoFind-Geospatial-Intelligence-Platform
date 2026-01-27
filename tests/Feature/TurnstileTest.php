@@ -5,10 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
-
 use App\Models\User;
-
-use RyanChandler\LaravelCloudflareTurnstile\Facades\Turnstile;
 
 class TurnstileTest extends TestCase
 {
@@ -21,12 +18,14 @@ class TurnstileTest extends TestCase
             'password' => bcrypt('password'),
         ]);
 
-        Turnstile::fake();
+        Http::fake([
+            'challenges.cloudflare.com/*' => Http::response(['success' => true]),
+        ]);
 
         $response = $this->post('/admin/login', [
             'email' => 'test@example.com',
             'password' => 'password',
-            'cf-turnstile-response' => Turnstile::dummy(),
+            'cf-turnstile-response' => 'valid-token',
         ]);
 
         $response->assertSessionHasNoErrors();
@@ -35,7 +34,9 @@ class TurnstileTest extends TestCase
 
     public function test_turnstile_validation_fails_with_invalid_token()
     {
-        Turnstile::fake()->fail();
+        Http::fake([
+            'challenges.cloudflare.com/*' => Http::response(['success' => false]),
+        ]);
 
         $response = $this->post('/admin/login', [
             'email' => 'test@example.com',
