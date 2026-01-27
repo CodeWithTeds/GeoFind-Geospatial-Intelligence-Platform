@@ -71,7 +71,7 @@
 
             <!-- Turnstile Widget -->
             <div class="mb-6 flex justify-center">
-                <div class="cf-turnstile" data-sitekey="{{ config('services.turnstile.key') }}"></div>
+                <div class="cf-turnstile" data-sitekey="{{ config('services.turnstile.key') }}" data-appearance="interaction-only"></div>
             </div>
 
             <div class="flex items-center justify-between">
