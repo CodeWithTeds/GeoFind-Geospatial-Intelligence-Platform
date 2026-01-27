@@ -10,13 +10,24 @@
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback&render=explicit" async defer></script>
     <script>
         window.onloadTurnstileCallback = function () {
-            turnstile.render('#turnstile-container', {
-                sitekey: "{{ config('services.turnstile.key') }}",
-                appearance: 'interaction-only',
-                callback: function(token) {
-                    console.log('Turnstile challenge success');
-                },
-            });
+            const renderTurnstile = () => {
+                const container = document.getElementById('turnstile-container');
+                if (container) {
+                    turnstile.render(container, {
+                        sitekey: "{{ config('services.turnstile.key') }}",
+                        appearance: 'interaction-only',
+                        callback: function(token) {
+                            console.log('Turnstile challenge success');
+                        },
+                    });
+                }
+            };
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', renderTurnstile);
+            } else {
+                renderTurnstile();
+            }
         };
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -82,7 +93,7 @@
 
             <!-- Turnstile Widget -->
             <div class="mb-6 flex justify-center">
-                <div class="cf-turnstile" data-sitekey="{{ config('services.turnstile.key') }}" data-appearance="interaction-only"></div>
+                <div id="turnstile-container"></div>
             </div>
 
             <div class="flex items-center justify-between">
