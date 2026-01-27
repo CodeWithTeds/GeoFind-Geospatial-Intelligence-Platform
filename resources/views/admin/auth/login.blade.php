@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - JerksHead</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <x-turnstile.scripts />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -65,6 +66,11 @@
                     <input id="remember_me" type="checkbox" name="remember" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
                     <span class="ml-2 text-sm text-gray-600">Remember me</span>
                 </label>
+            </div>
+
+            <!-- Turnstile Widget -->
+            <div class="mb-6 flex justify-center">
+                <x-turnstile />
             </div>
 
             <div class="flex items-center justify-between">

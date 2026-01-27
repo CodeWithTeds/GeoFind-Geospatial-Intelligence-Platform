@@ -30,7 +30,10 @@ class LoginController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $this->authService->login($request->validated(), $request->boolean('remember'));
+        $this->authService->login(
+            $request->only(['email', 'password']), 
+            $request->boolean('remember')
+        );
 
         return redirect()->intended(route('admin.dashboard'));
     }

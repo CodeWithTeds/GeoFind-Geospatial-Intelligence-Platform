@@ -29,7 +29,7 @@ Route::prefix('cesium')->middleware(['throttle:60,1'])->group(function () {
 });
 
 // Location Routes
-Route::prefix('locations')->group(function () {
+Route::middleware(['throttle:api'])->prefix('locations')->group(function () {
     Route::post('/calculate-bearing', [LocationController::class, 'calculateBearing']);
     Route::post('/calculate-distance', [LocationController::class, 'calculateDistance']);
     Route::post('/calculate-midpoint', [LocationController::class, 'calculateMidpoint']);
@@ -40,4 +40,4 @@ Route::prefix('locations')->group(function () {
 });
 
 // Question Routes
-Route::apiResource('questions', QuestionController::class);
+Route::middleware(['throttle:api'])->apiResource('questions', QuestionController::class);

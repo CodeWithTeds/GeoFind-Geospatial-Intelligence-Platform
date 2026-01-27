@@ -25,6 +25,7 @@ class LoginRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string'],
             'remember' => ['boolean'],
+            'cf-turnstile-response' => ['required', new \RyanChandler\LaravelCloudflareTurnstile\Rules\Turnstile],
         ];
     }
 }
