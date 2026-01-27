@@ -40,7 +40,7 @@
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-save me-2"></i>{{ $submitText ?? 'Save Location' }}
                 </button>
-                <a href="{{ route('locations.index')}}" class="btn btn-secondary">
+                <a href="{{ route('admin.locations.index')}}" class="btn btn-secondary">
                     <i class="fas fa-times me-2"></i>Cancel
                 </a>
             </div>

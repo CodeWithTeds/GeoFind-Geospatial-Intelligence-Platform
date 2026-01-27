@@ -2,12 +2,17 @@ document.addEventListener('DOMContentLoaded', function () {
     // CSRF token
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
+    function getRouteUrl(name) {
+        const meta = document.querySelector(`meta[name="${name}"]`);
+        return meta ? meta.getAttribute('content') : '';
+    }
+
     // Bearing calculation
     document.getElementById('bearingForm')?.addEventListener('submit', async (e) => {
         e.preventDefault();
         try {
             const formData = new FormData(e.target);
-            const response = await fetch('/locations/calculate-bearing', {
+            const response = await fetch(getRouteUrl('calculate-bearing-url'), {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': csrfToken,
@@ -53,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     throw new Error('Please select different points');
                 }
 
-                const response = await fetch('/calculate-distance', {
+                const response = await fetch(getRouteUrl('calculate-distance-url'), {
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': csrfToken,
@@ -100,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         try {
             const formData = new FormData(e.target);
-            const response = await fetch('/calculate-midpoint', {
+            const response = await fetch(getRouteUrl('calculate-midpoint-url'), {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': csrfToken,
@@ -142,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             const formData = new FormData(e.target);
 
-            const response = await fetch('/calculate-triangle-area', {
+            const response = await fetch(getRouteUrl('calculate-triangle-area-url'), {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': csrfToken,
@@ -188,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
             mapContainer.style.display = 'none';
 
             // Fetch hotels data
-            const hotelsResponse = await fetch('/find-hotels-in-radius', {
+            const hotelsResponse = await fetch(getRouteUrl('find-hotels-in-radius-url'), {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': csrfToken,
@@ -295,7 +300,10 @@ document.addEventListener('DOMContentLoaded', function () {
             try {
                 resultDiv.innerHTML = '<div class="alert alert-info">Loading address information...</div>';
 
-                const response = await fetch(`/locations/${locationId}/address`, {
+                const urlTemplate = getRouteUrl('get-address-url-template');
+                const url = urlTemplate.replace('LOCATION_ID', locationId);
+
+                const response = await fetch(url, {
                     method: 'GET',
                     headers: {
                         'X-CSRF-TOKEN': csrfToken,
@@ -469,7 +477,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        fetch('/locations/to-geohash', {
+        fetch(getRouteUrl('to-geohash-url'), {
             method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': csrfToken,
@@ -531,7 +539,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         try {
             const formData = new FormData(e.target);
-            const response = await fetch('/calculate-route', {
+            const response = await fetch(getRouteUrl('calculate-route-url'), {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
@@ -583,7 +591,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         try {
             const formData = new FormData(e.target);
-            const response = await fetch('/calculate-route', {
+            const response = await fetch(getRouteUrl('calculate-route-url'), {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
@@ -684,7 +692,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const longitude = parseFloat(formData.get('longitude'));
 
             console.log('sending data', { latitude, longitude });
-            const response = await fetch('/locations/to-geohash', {
+            const response = await fetch(getRouteUrl('to-geohash-url'), {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': csrfToken,
@@ -859,7 +867,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 throw new Error('Please select at least 3 points');
             }
             
-            const response = await fetch('/calculate-convex-hull', {
+            const response = await fetch(getRouteUrl('calculate-convex-hull-url'), {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': csrfToken,
@@ -983,7 +991,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 throw new Error('East boundary must be greater than West boundary');
             }
             
-            const response = await fetch('/generate-grid', {
+            const response = await fetch(getRouteUrl('generate-grid-url'), {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': csrfToken,
@@ -1048,7 +1056,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 throw new Error('East boundary must be greater than West boundary');
             }
             
-            const response = await fetch('/generate-heatmap', {
+            const response = await fetch(getRouteUrl('generate-heatmap-url'), {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': csrfToken,
@@ -1112,7 +1120,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 throw new Error('East boundary must be greater than West boundary');
             }
             
-            const response = await fetch('/find-location-clusters', {
+            const response = await fetch(getRouteUrl('find-location-clusters-url'), {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': csrfToken,

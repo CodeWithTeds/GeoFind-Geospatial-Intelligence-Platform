@@ -22,29 +22,6 @@ Route::get('/play', function () {
     return view('play');
 })->name('play');
 
-Route::resource('locations', LocationController::class);
-
-Route::post('/calculate-distance', [LocationController::class, 'calculateDistance'])->name('locations.calculate-distance');
-Route::post('/calculate-midpoint', [LocationController::class, 'calculateMidpoint'])->name('locations.calculate-midpoint');
-Route::post('/find-points-in-radius', [LocationController::class, 'findPointInRadius'])->name('locations.find-points-in-radius');
-Route::post('/find-hotels-in-radius', [LocationController::class, 'findHotelsInRadius'])->name('locations.find-hotels-in-radius');
-Route::post('/find-pois-in-radius', [LocationController::class, 'findPOIsInRadius'])->name('locations.find-pois-in-radius');
-Route::post('/geofence-visualization', [LocationController::class, 'createGeofenceVisualization'])->name('locations.geofence-visualization');
-Route::post('/calculate-triangle-area', [LocationController::class, 'calculateTriangleArea'])->name('locations.calculate-triangle-area');
-Route::post('/locations/calculate-bearing', [LocationController::class, 'calculateBearing'])->name('locations.calculate-bearing');
-Route::get('/locations/{location}/address', [LocationController::class, 'getAddress'])->name('locations.get-address');
-Route::post('/locations/to-geohash', [LocationController::class, 'toGeohash']);
-Route::post('/calculate-route', [LocationController::class, 'calculateRoute'])->name('locations.calculate-route');
-Route::get('/distance-calculator', function () {
-    return view('distance-calculator');
-});
-
-// New routes for additional features
-Route::post('/calculate-convex-hull', [LocationController::class, 'calculateConvexHull'])->name('locations.calculate-convex-hull');
-Route::post('/generate-grid', [LocationController::class, 'generateGrid'])->name('locations.generate-grid');
-Route::post('/generate-heatmap', [LocationController::class, 'generateLocationHeatmap'])->name('locations.generate-heatmap');
-Route::post('/find-location-clusters', [LocationController::class, 'findLocationClusters'])->name('locations.find-location-clusters');
-
 // Admin Auth Routes
 Route::prefix('admin')->group(function () {
     Route::get('login', [LoginController::class, 'create'])->name('admin.login');
@@ -63,5 +40,28 @@ Route::prefix('admin')->group(function () {
             Route::get('/create', \App\Livewire\Admin\Questions\Create::class)->name('create');
             Route::get('/{id}/edit', \App\Livewire\Admin\Questions\Edit::class)->name('edit');
         });
+
+        // Location Routes (Protected)
+        Route::resource('locations', LocationController::class)->names('admin.locations');
+        
+        Route::post('/calculate-distance', [LocationController::class, 'calculateDistance'])->name('admin.locations.calculate-distance');
+        Route::post('/calculate-midpoint', [LocationController::class, 'calculateMidpoint'])->name('admin.locations.calculate-midpoint');
+        Route::post('/find-points-in-radius', [LocationController::class, 'findPointInRadius'])->name('admin.locations.find-points-in-radius');
+        Route::post('/find-hotels-in-radius', [LocationController::class, 'findHotelsInRadius'])->name('admin.locations.find-hotels-in-radius');
+        Route::post('/find-pois-in-radius', [LocationController::class, 'findPOIsInRadius'])->name('admin.locations.find-pois-in-radius');
+        Route::post('/geofence-visualization', [LocationController::class, 'createGeofenceVisualization'])->name('admin.locations.geofence-visualization');
+        Route::post('/calculate-triangle-area', [LocationController::class, 'calculateTriangleArea'])->name('admin.locations.calculate-triangle-area');
+        Route::post('/locations/calculate-bearing', [LocationController::class, 'calculateBearing'])->name('admin.locations.calculate-bearing');
+        Route::get('/locations/{location}/address', [LocationController::class, 'getAddress'])->name('admin.locations.get-address');
+        Route::post('/locations/to-geohash', [LocationController::class, 'toGeohash'])->name('admin.locations.to-geohash');
+        Route::post('/calculate-route', [LocationController::class, 'calculateRoute'])->name('admin.locations.calculate-route');
+        Route::get('/distance-calculator', function () {
+            return view('distance-calculator');
+        })->name('admin.locations.distance-calculator-view');
+
+        Route::post('/calculate-convex-hull', [LocationController::class, 'calculateConvexHull'])->name('admin.locations.calculate-convex-hull');
+        Route::post('/generate-grid', [LocationController::class, 'generateGrid'])->name('admin.locations.generate-grid');
+        Route::post('/generate-heatmap', [LocationController::class, 'generateLocationHeatmap'])->name('admin.locations.generate-heatmap');
+        Route::post('/find-location-clusters', [LocationController::class, 'findLocationClusters'])->name('admin.locations.find-location-clusters');
     });
 });

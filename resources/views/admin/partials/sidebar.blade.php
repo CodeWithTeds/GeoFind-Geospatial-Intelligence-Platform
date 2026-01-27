@@ -5,8 +5,8 @@
             Dashboard
         </a>
         
-        <a href="{{ route('locations.index') }}" wire:navigate class="group flex items-center px-3 py-3 text-sm font-medium rounded-md {{ request()->routeIs('locations.index') ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50' }} transition ease-in-out duration-150">
-            <span class="material-icons mr-3 {{ request()->routeIs('locations.index') ? 'text-blue-600' : 'text-gray-400 group-hover:text-gray-500' }}">place</span>
+        <a href="{{ route('admin.locations.index') }}" wire:navigate class="group flex items-center px-3 py-3 text-sm font-medium rounded-md {{ request()->routeIs('admin.locations.*') ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50' }} transition ease-in-out duration-150">
+            <span class="material-icons mr-3 {{ request()->routeIs('admin.locations.*') ? 'text-blue-600' : 'text-gray-400 group-hover:text-gray-500' }}">place</span>
             Locations
         </a>
 

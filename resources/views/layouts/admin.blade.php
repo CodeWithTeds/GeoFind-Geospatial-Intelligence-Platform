@@ -4,11 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @yield('meta-urls')
 
     <title>{{ config('app.name', 'GIS Admin') }} - @yield('title')</title>
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @yield('styles')
 
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -53,5 +55,6 @@
         </div>
     </main>
 
+    @yield('scripts')
 </body>
 </html>

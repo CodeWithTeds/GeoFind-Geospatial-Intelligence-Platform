@@ -21,11 +21,11 @@
                             <td>{{ $location->longitude }}</td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <a href="{{ route('locations.edit', $location) }}"
+                                    <a href="{{ route('admin.locations.edit', $location) }}"
                                         class="btn btn-sm btn-warning me-1">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('locations.destroy', $location) }}" method="POST"
+                                    <form action="{{ route('admin.locations.destroy', $location) }}" method="POST"
                                         class="d-inline">
                                         @csrf
                                         @method('DELETE')

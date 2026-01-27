@@ -8,6 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // CSRF token
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
+    function getRouteUrl(name) {
+        const meta = document.querySelector(`meta[name="${name}"]`);
+        return meta ? meta.getAttribute('content') : '';
+    }
+
     // Geohash form handling
     const geohashForm = document.getElementById('geohashForm');
     if (geohashForm) {
@@ -31,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     throw new Error('Longitude must be between -180 and 180');
                 }
                 
-                const response = await fetch('/locations/to-geohash', {
+                const response = await fetch(getRouteUrl('to-geohash-url'), {
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': csrfToken,

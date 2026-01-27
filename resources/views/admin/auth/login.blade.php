@@ -8,6 +8,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://*.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://*.cloudflare.com https://challenges.cloudflare.com data:; frame-src https://*.cloudflare.com https://challenges.cloudflare.com; connect-src 'self' https://*.cloudflare.com https://challenges.cloudflare.com; img-src 'self' data:;">
     <title>Admin Login - JerksHead</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    @if(!app()->environment('local'))
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback&render=explicit" async defer></script>
     <script>
         window.onloadTurnstileCallback = function () {
@@ -31,6 +32,7 @@
             }
         };
     </script>
+    @endif
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -93,9 +95,11 @@
             </div>
 
             <!-- Turnstile Widget -->
+            @if(!app()->environment('local'))
             <div class="mb-6 flex justify-center">
                 <div id="turnstile-container"></div>
             </div>
+            @endif
 
             <div class="flex items-center justify-between">
                 <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 shadow-md transform hover:-translate-y-0.5">

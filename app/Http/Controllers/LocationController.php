@@ -41,7 +41,7 @@ class LocationController extends Controller
     public function store(LocationValidationRequest $request)
     {
         $this->locationService->createLocation($request->validated());
-        return redirect()->route('locations.index')->with('success', 'Location added successfully');
+        return redirect()->route('admin.locations.index')->with('success', 'Location added successfully');
     }
 
     /**
@@ -119,7 +119,7 @@ class LocationController extends Controller
     public function update(LocationValidationRequest $request, Location $location)
     {
         $this->locationService->updateLocation($location, $request->validated());
-        return redirect()->route('locations.index')->with('success', 'Location updated successfully');
+        return redirect()->route('admin.locations.index')->with('success', 'Location updated successfully');
     }
 
     /**
@@ -357,6 +357,6 @@ class LocationController extends Controller
     public function destroy(Location $location)
     {
         $this->locationService->deleteLocation($location);
-        return redirect()->route('locations.index')->with('success', 'Location Deleted Successfully');
+        return redirect()->route('admin.locations.index')->with('success', 'Location Deleted Successfully');
     }
 }
