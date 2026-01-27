@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://*.cloudflare.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://*.cloudflare.com https://challenges.cloudflare.com data:; frame-src https://*.cloudflare.com https://challenges.cloudflare.com; connect-src 'self' https://*.cloudflare.com https://challenges.cloudflare.com; img-src 'self' data:;">
     <title>Admin Login - JerksHead</title>
     <script src="https://cdn.tailwindcss.com"></script>
