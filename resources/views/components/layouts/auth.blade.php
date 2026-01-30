@@ -56,7 +56,7 @@
         <!-- Left Panel: Brand Imagery -->
         <div class="hidden md:flex w-1/2 h-full relative overflow-hidden justify-center items-center">
             <!-- Image displayed naturally -->
-            <img src="{{ asset('images/p1.png') }}" 
+            <img src="{{ asset('images/p1.avif') }}" 
                  alt="Oxbit Access" 
                  class="max-w-[80%] max-h-[80%] object-contain drop-shadow-2xl">
         </div>
