@@ -27,7 +27,7 @@ class LoginRequest extends FormRequest
             'remember' => ['boolean'],
         ];
 
-        if (!app()->environment('local')) {
+        if (!app()->environment('local', 'testing')) {
             $rules['cf-turnstile-response'] = ['required', new \App\Rules\Turnstile];
         }
 

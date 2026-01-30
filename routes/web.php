@@ -5,6 +5,10 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LandingController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Client\Auth\LoginController as ClientLoginController;
+use App\Livewire\Client\Auth\Login;
+use App\Http\Middleware\IpControlMiddleware;
+use App\Livewire\Client\Auth\Register;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,9 +22,26 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 
 Route::get('/', [LandingController::class, 'index']);
 
+use App\Http\Controllers\Client\Auth\RegisterController;
+
+// Client Auth Routes
+Route::middleware('guest:web')->group(function () {
+    Route::get('login', Login::class)
+        ->middleware([IpControlMiddleware::class])
+        ->name('login');
+    
+    Route::get('register', Register::class)->name('register');
+    Route::post('register', [RegisterController::class, 'store']);
+});
+
+Route::post('logout', [ClientLoginController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');
+
+// Protected Game Route
 Route::get('/play', function () {
     return view('play');
-})->name('play');
+})->middleware(['auth'])->name('play');
 
 // Admin Auth Routes
 Route::prefix('admin')->group(function () {

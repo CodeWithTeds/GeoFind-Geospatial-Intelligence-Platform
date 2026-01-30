@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&display=swap');
+
+@theme {
+    --font-chakra: 'Chakra Petch', sans-serif;
+}
+
+body {
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+/* Custom scrollbar for game feel */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #18181b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #eab308;
+    border-radius: 4px;
+}
+
+/* Utility Classes */
+.parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
