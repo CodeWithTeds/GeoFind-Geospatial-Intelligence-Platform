@@ -52,7 +52,7 @@
         <!-- Turnstile (Production Only) -->
         @if(!app()->environment('local'))
         <div class="mt-4 flex justify-center" wire:ignore>
-            <div class="cf-turnstile" data-sitekey="{{ config('services.turnstile.key') }}" data-theme="dark" data-callback="turnstileCallback"></div>
+            <div id="turnstile-container"></div>
         </div>
         @script
         <script>

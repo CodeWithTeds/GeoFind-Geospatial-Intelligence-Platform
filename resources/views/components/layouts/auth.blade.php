@@ -13,7 +13,27 @@
 
     <!-- Cloudflare Turnstile (Production Only) -->
     @if(!app()->environment('local'))
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback&render=explicit" async defer></script>
+    <script>
+        window.onloadTurnstileCallback = function () {
+            const renderTurnstile = () => {
+                const container = document.getElementById('turnstile-container');
+                if (container) {
+                    turnstile.render(container, {
+                        sitekey: "{{ config('services.turnstile.key') }}",
+                        theme: 'dark',
+                        callback: 'turnstileCallback',
+                    });
+                }
+            };
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', renderTurnstile);
+            } else {
+                renderTurnstile();
+            }
+        };
+    </script>
     @endif
 
     <style>
