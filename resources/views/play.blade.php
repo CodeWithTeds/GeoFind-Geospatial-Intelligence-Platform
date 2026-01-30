@@ -12,6 +12,9 @@
     <script src="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Cesium.js"></script>
     <link href="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
     
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Vite Assets -->
     @vite(['resources/css/landing.css', 'resources/js/play.js'])
 </head>
@@ -25,6 +28,42 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
         </a>
+    </div>
+
+    <!-- Question Panel (Bottom Right) -->
+    <div id="question-panel" class="fixed right-0 bottom-0 md:right-6 md:bottom-6 w-full md:w-[450px] max-h-[60vh] md:max-h-[50vh] text-white z-50 transform transition-transform duration-500 translate-y-0 flex flex-col items-end p-4 md:p-0">
+        <div class="bg-zinc-900/95 md:bg-zinc-900/90 border border-yellow-500/50 p-4 md:p-6 shadow-2xl backdrop-blur-md rounded-t-xl md:rounded-lg w-full overflow-y-auto">
+            <div class="flex justify-between items-center mb-3 md:mb-4">
+                <div class="text-yellow-500 font-['Chakra_Petch'] text-[10px] md:text-xs tracking-[0.2em] uppercase opacity-70">Incoming Transmission</div>
+                <div class="flex gap-2">
+                    <div class="w-1.5 h-1.5 md:w-2 md:h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+                    <div class="w-1.5 h-1.5 md:w-2 md:h-2 bg-yellow-500/50 rounded-full"></div>
+                    <div class="w-1.5 h-1.5 md:w-2 md:h-2 bg-yellow-500/20 rounded-full"></div>
+                </div>
+            </div>
+
+            <h2 id="question-title" class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4 font-['Chakra_Petch'] uppercase tracking-wide leading-tight drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">Initializing...</h2>
+            
+            <p id="question-description" class="text-gray-300 text-xs md:text-sm leading-relaxed font-['Chakra_Petch'] border-l-2 border-yellow-500 pl-3 md:pl-4 py-1 mb-4 md:mb-6 max-h-[120px] md:max-h-[150px] overflow-y-auto">
+                Establishing secure connection to mission control...
+            </p>
+            
+            <div class="grid grid-cols-2 gap-2 md:gap-3 mb-4 md:mb-6">
+                <div class="bg-black/40 p-2 border border-white/10 rounded">
+                    <div class="text-[9px] md:text-[10px] text-gray-500 font-mono mb-0.5">DIFFICULTY</div>
+                    <div id="question-difficulty" class="text-yellow-400 font-['Chakra_Petch'] font-bold text-xs md:text-sm">---</div>
+                </div>
+                <div class="bg-black/40 p-2 border border-white/10 rounded">
+                    <div class="text-[9px] md:text-[10px] text-gray-500 font-mono mb-0.5">TOLERANCE</div>
+                    <div id="question-tolerance" class="text-yellow-400 font-['Chakra_Petch'] font-bold text-xs md:text-sm">---</div>
+                </div>
+            </div>
+            
+            <button id="confirm-question-btn" class="group relative w-full overflow-hidden bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-3 md:py-3 px-4 transition-all duration-300 font-['Chakra_Petch'] text-base md:text-lg uppercase tracking-[0.15em] hover:shadow-[0_0_20px_rgba(234,179,8,0.6)] rounded active:scale-95">
+                <span class="relative z-10">ACKNOWLEDGE MISSION</span>
+                <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+            </button>
+        </div>
     </div>
 
     <!-- Global App Config -->

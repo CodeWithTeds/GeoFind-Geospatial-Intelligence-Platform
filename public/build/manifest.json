@@ -8,12 +8,12 @@
     "name": "vendor"
   },
   "resources/css/app.css": {
-    "file": "assets/app-SI98jseW.css",
+    "file": "assets/app-BfvfDH2x.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/css/landing.css": {
-    "file": "assets/landing-DOJO1Zu8.css",
+    "file": "assets/landing-CVJ7GpUZ.css",
     "src": "resources/css/landing.css",
     "isEntry": true
   },
@@ -43,13 +43,13 @@
     ]
   },
   "resources/js/landing.js": {
-    "file": "assets/landing-DYqo-QZW.js",
+    "file": "assets/landing-CZK092zm.js",
     "name": "landing",
     "src": "resources/js/landing.js",
     "isEntry": true
   },
   "resources/js/play.js": {
-    "file": "assets/play-BeaqDl9P.js",
+    "file": "assets/play-CGT1EiSd.js",
     "name": "play",
     "src": "resources/js/play.js",
     "isEntry": true,

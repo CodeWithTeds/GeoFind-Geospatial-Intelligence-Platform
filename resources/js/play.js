@@ -19,10 +19,61 @@ const CONFIG = {
     tilesetId: 96188
 };
 
+let isGameActive = false;
+
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize map immediately
-    initializeMap();
+    const viewer = initializeMap();
+    
+    if (viewer) {
+        fetchQuestion();
+        setupUI(viewer);
+    }
 });
+
+async function fetchQuestion() {
+    try {
+        // Fetch questions from API
+        const response = await fetch('/api/questions');
+        if (!response.ok) throw new Error('Network response was not ok');
+        
+        const data = await response.json();
+        const questions = data.data || data; // Handle pagination or direct array
+        
+        if (questions && questions.length > 0) {
+            // Get the most recent question
+            const question = questions[questions.length - 1];
+            
+            // Update UI
+            document.getElementById('question-title').textContent = question.title;
+            document.getElementById('question-description').textContent = question.description;
+            document.getElementById('question-difficulty').textContent = (question.difficulty || 'NORMAL').toUpperCase();
+            document.getElementById('question-tolerance').textContent = (question.tolerance_meters || 50) + ' METERS';
+        } else {
+            document.getElementById('question-title').textContent = "NO MISSIONS AVAILABLE";
+            document.getElementById('question-description').textContent = "No active operations found in this sector. Stand by for future updates.";
+        }
+    } catch (error) {
+        console.error('Error fetching question:', error);
+        document.getElementById('question-title').textContent = "CONNECTION FAILURE";
+        document.getElementById('question-description').textContent = "Unable to establish uplink with Mission Control. Check secure connection.";
+    }
+}
+
+function setupUI(viewer) {
+    const confirmBtn = document.getElementById('confirm-question-btn');
+    const panel = document.getElementById('question-panel');
+    
+    confirmBtn.addEventListener('click', () => {
+        // Enable game mode
+        isGameActive = true;
+        
+        // Hide panel (slide down)
+        panel.style.transform = 'translateY(120%)';
+        
+        // Optional: Reset camera or focus on start area if needed
+    });
+}
 
 /**
  * Initializes the Cesium Map Viewer.
@@ -57,7 +108,7 @@ function initializeMap() {
     }
 
     // Set Camera View
-    viewer.camera.flyTo({
+    viewer.camera.setView({
         destination: Cesium.Cartesian3.fromDegrees(CONFIG.camera.longitude, CONFIG.camera.latitude, CONFIG.camera.height),
         orientation: {
             heading: Cesium.Math.toRadians(CONFIG.camera.heading),
@@ -69,6 +120,9 @@ function initializeMap() {
 
     // Add click handler for pinning location
     viewer.screenSpaceEventHandler.setInputAction(function(click) {
+        // Block interaction if game hasn't started (OK button not clicked)
+        if (!isGameActive) return;
+
         const cartesian = viewer.scene.pickPosition(click.position);
         if (cartesian) {
             const cartographic = Cesium.Cartographic.fromCartesian(cartesian);
@@ -100,9 +154,10 @@ function initializeMap() {
             });
         }
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-
+    
     return viewer;
 }
+
 
 /**
  * Adds hotel markers to the map.
