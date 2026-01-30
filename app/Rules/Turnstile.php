@@ -21,8 +21,11 @@ class Turnstile implements ValidationRule
             'remoteip' => request()->ip(),
         ]);
 
-        if (! $response->json('success')) {
-            $fail('The Turnstile check failed. Please try again.');
+        $data = $response->json();
+
+        if (! ($data['success'] ?? false)) {
+            $errorCodes = implode(', ', $data['error-codes'] ?? []);
+            $fail('The Turnstile check failed. Please try again. (Debug: ' . $errorCodes . ')');
         }
     }
 }
