@@ -71,7 +71,12 @@ class Register extends Component
 
     public function register()
     {
-        $validatedData = $this->validate();
+        try {
+            $validatedData = $this->validate();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            $this->dispatch('reset-turnstile');
+            throw $e;
+        }
 
         // Resolve service from container manually or use method injection if supported by Livewire version
         $authService = app(ClientAuthService::class);

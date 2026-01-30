@@ -43,7 +43,12 @@ class Login extends Component
 
     public function login()
     {
-        $this->validate();
+        try {
+            $this->validate();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            $this->dispatch('reset-turnstile');
+            throw $e;
+        }
 
         $authService = app(ClientAuthService::class);
 

@@ -41,6 +41,17 @@
             } else {
                 renderTurnstile();
             }
+
+            // Listen for reset event from Livewire
+            window.addEventListener('reset-turnstile', () => {
+                if (window.turnstile) {
+                    turnstile.reset();
+                    // Also clear the token in Livewire to match the UI state
+                    if (typeof window.turnstileCallback === 'function') {
+                        window.turnstileCallback(null);
+                    }
+                }
+            });
         };
     </script>
     @endif
