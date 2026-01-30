@@ -18,6 +18,12 @@ class Register extends Component
 
     public function updated($propertyName)
     {
+        // Skip validation for Turnstile token to prevent consuming the one-time token
+        // Validation will happen on form submission
+        if ($propertyName === 'turnstileToken') {
+            return;
+        }
+
         if ($propertyName === 'password') {
             // If confirmation is empty, skip 'confirmed' check to avoid premature error
             if (empty($this->password_confirmation)) {
