@@ -16,7 +16,7 @@ class LivewireRegisterTest extends TestCase
     public function can_register_with_valid_gmail_and_no_spaces_in_name()
     {
         $component = Livewire::test(Register::class)
-            ->set('name', 'ValidUser')
+            ->set('name', 'ValidUser123')
             ->set('email', 'test@gmail.com')
             ->set('password', 'password123')
             ->set('password_confirmation', 'password123')
@@ -46,10 +46,32 @@ class LivewireRegisterTest extends TestCase
     }
 
     /** @test */
+    public function name_must_be_between_10_and_20_chars()
+    {
+        // Too short
+        Livewire::test(Register::class)
+            ->set('name', 'ShortUser')
+            ->set('email', 'test@gmail.com')
+            ->set('password', 'password123')
+            ->set('password_confirmation', 'password123')
+            ->call('register')
+            ->assertHasErrors(['name']);
+
+        // Too long
+        Livewire::test(Register::class)
+            ->set('name', 'ThisUserIsWayTooLongForTheLimit')
+            ->set('email', 'test@gmail.com')
+            ->set('password', 'password123')
+            ->set('password_confirmation', 'password123')
+            ->call('register')
+            ->assertHasErrors(['name']);
+    }
+
+    /** @test */
     public function email_must_be_gmail()
     {
         Livewire::test(Register::class)
-            ->set('name', 'ValidUser')
+            ->set('name', 'ValidUser123')
             ->set('email', 'test@yahoo.com')
             ->set('password', 'password123')
             ->set('password_confirmation', 'password123')

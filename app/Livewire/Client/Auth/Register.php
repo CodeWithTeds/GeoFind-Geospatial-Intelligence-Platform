@@ -40,7 +40,7 @@ class Register extends Component
     protected function rules()
     {
         $rules = [
-            'name' => ['required', 'string', 'max:10', 'regex:/^\S*$/u'], // No spaces allowed
+            'name' => ['required', 'string', 'min:10', 'max:20', 'regex:/^\S*$/u'], // No spaces allowed
             'email' => [
                 'required',
                 'string',
