@@ -22,7 +22,16 @@
                     turnstile.render(container, {
                         sitekey: "{{ config('services.turnstile.key') }}",
                         theme: 'dark',
-                        callback: 'turnstileCallback',
+                        callback: function(token) {
+                            if (typeof window.turnstileCallback === 'function') {
+                                window.turnstileCallback(token);
+                            }
+                        },
+                        'expired-callback': function() {
+                             if (typeof window.turnstileCallback === 'function') {
+                                window.turnstileCallback(null);
+                            }
+                        }
                     });
                 }
             };
