@@ -13,13 +13,19 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::firstOrCreate(
+        $user = User::firstOrCreate(
             ['email' => 'profalex@admin.com'],
             [
                 'name' => 'Professor Alex',
                 'password' => 'password', // The model casts this to hashed
                 'email_verified_at' => now(),
+                'role' => 'admin',
             ]
         );
+
+        // Ensure role is admin if user already existed
+        if ($user->role !== 'admin') {
+            $user->update(['role' => 'admin']);
+        }
     }
 }

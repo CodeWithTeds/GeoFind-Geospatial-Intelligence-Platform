@@ -26,6 +26,7 @@ class ClientAuthService
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => 'client',
         ]);
 
         event(new Registered($user));
