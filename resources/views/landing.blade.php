@@ -37,8 +37,8 @@
     <!-- Main Content Container -->
     <div class="relative z-10 w-full h-full flex flex-col p-6 md:p-12">
         
-        <!-- Header / Top Left Button -->
-        <header class="flex justify-start">
+        <!-- Header / Top Buttons -->
+        <header class="flex justify-between items-start w-full">
             <button id="play-now-btn" aria-label="Play Now" onclick="Livewire.dispatch('open-instruction-overlay')" class="group relative bg-black/80 text-white px-8 py-3 rounded-full font-bold border-2 border-yellow-500/50 hover:bg-black hover:border-yellow-400 transition-all duration-300 shadow-lg flex items-center gap-3 overflow-hidden">
                 <span class="relative z-10 tracking-wider text-sm md:text-base">PLAY NOW!</span>
                 <span class="relative z-10 w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(250,204,21,0.8)]"></span>
@@ -46,6 +46,18 @@
                 <!-- Hover effect glow -->
                 <div class="absolute inset-0 bg-yellow-400/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
             </button>
+
+            @auth
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="group relative bg-black/80 text-white px-6 py-3 rounded-full font-bold border-2 border-red-500/50 hover:bg-black hover:border-red-400 transition-all duration-300 shadow-lg flex items-center gap-2 overflow-hidden">
+                    <span class="relative z-10 tracking-wider text-sm md:text-base">LOGOUT</span>
+                    
+                    <!-- Hover effect glow -->
+                    <div class="absolute inset-0 bg-red-500/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                </button>
+            </form>
+            @endauth
         </header>
 
         <!-- Main Body -->
