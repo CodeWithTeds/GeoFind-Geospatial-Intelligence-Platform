@@ -62,7 +62,7 @@ class Login extends Component
                 request()->ip()
             );
 
-            return redirect()->intended(route('play'));
+            return redirect()->route('dashboard');
         } catch (\Illuminate\Validation\ValidationException $e) {
             $this->addError('email', $e->getMessage());
         } catch (\Exception $e) {

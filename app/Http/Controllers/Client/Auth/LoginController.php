@@ -50,8 +50,8 @@ class LoginController extends Controller implements HasMiddleware
             $request->ip()
         );
 
-        // Redirect to the game (/play) after successful login
-        return redirect()->intended(route('play'));
+        // Redirect to the dashboard after successful login
+        return redirect()->route('dashboard');
     }
 
     /**

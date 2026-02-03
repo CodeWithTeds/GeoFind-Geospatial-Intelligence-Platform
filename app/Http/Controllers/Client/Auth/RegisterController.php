@@ -48,6 +48,6 @@ class RegisterController extends Controller implements HasMiddleware
             $request->ip()
         );
 
-        return redirect()->intended(route('play'));
+        return redirect()->intended(route('dashboard'));
     }
 }

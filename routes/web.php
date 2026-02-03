@@ -34,6 +34,13 @@ Route::middleware('guest:web')->group(function () {
     Route::post('register', [RegisterController::class, 'store']);
 });
 
+// Client Dashboard
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('client.dashboard');
+    })->name('dashboard');
+});
+
 Route::post('logout', [ClientLoginController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');

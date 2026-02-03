@@ -92,7 +92,7 @@ class Register extends Component
             request()->ip()
         );
 
-        return redirect()->route('play');
+        return redirect()->route('dashboard');
     }
 
     public function render()

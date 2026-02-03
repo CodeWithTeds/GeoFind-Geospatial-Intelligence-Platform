@@ -96,6 +96,10 @@
         }
     </script>
     
+    <!-- Finisher Header Scripts -->
+    <script src="{{ asset('js/libs/finisher-header.es5.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/finisher-init.js') }}" type="text/javascript"></script>
+
     <livewire:instruction-overlay />
 </body>
 </html>
