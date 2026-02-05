@@ -61,11 +61,7 @@
     </main>
 
     <!-- Footer -->
-    <div class="absolute bottom-2 left-0 w-full text-center z-20 pointer-events-none">
-        <p class="text-[10px] text-gray-600 font-mono tracking-widest uppercase opacity-70">
-            System Version 2.0.4 • Prof Alex The G.O.A.T
-        </p>
-    </div>
+    @include('client.partials.footer')
 
     <!-- Custom JS for Mobile Menu (Inline for simplicity as we moved to Tailwind) -->
     <script>
