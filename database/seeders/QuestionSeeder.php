@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Question;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Faker\Factory as Faker;
 
 class QuestionSeeder extends Seeder
@@ -15,7 +16,9 @@ class QuestionSeeder extends Seeder
     public function run(): void
     {
         // Rollback functionality: Clear existing questions
+        Schema::disableForeignKeyConstraints();
         DB::table('questions')->truncate();
+        Schema::enableForeignKeyConstraints();
         
         $faker = Faker::create();
 
