@@ -19,6 +19,7 @@ class UpdateQuestionRequest extends FormRequest
             'answer_longitude' => 'sometimes|required|numeric|between:-180,180',
             'tolerance_meters' => 'sometimes|required|integer|min:0',
             'difficulty' => 'sometimes|required|in:easy,medium,hard',
+            'level' => 'sometimes|required|integer|min:1',
             'description' => 'nullable|string',
         ];
     }

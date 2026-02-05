@@ -54,4 +54,9 @@ class QuestionRepository implements QuestionRepositoryInterface
         }
         return $question->delete();
     }
+
+    public function findByLevel(int $level): ?Model
+    {
+        return $this->model->where('level', $level)->first();
+    }
 }

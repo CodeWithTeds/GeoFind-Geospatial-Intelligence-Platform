@@ -14,4 +14,5 @@ interface QuestionRepositoryInterface
     public function create(array $data): Model;
     public function update(int $id, array $data): bool;
     public function delete(int $id): bool;
+    public function findByLevel(int $level): ?Model;
 }

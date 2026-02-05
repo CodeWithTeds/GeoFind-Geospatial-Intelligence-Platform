@@ -18,6 +18,7 @@ class Edit extends Component
     public $answer_longitude;
     public $tolerance_meters;
     public $difficulty;
+    public $level;
 
     protected $rules = [
         'title' => 'required|string|max:255',
@@ -26,6 +27,7 @@ class Edit extends Component
         'answer_longitude' => 'required|numeric|between:-180,180',
         'tolerance_meters' => 'required|integer|min:1',
         'difficulty' => 'required|in:easy,medium,hard',
+        'level' => 'required|integer|min:1',
     ];
 
     public function mount(Question $question)
@@ -37,6 +39,7 @@ class Edit extends Component
         $this->answer_longitude = $question->answer_longitude;
         $this->tolerance_meters = $question->tolerance_meters;
         $this->difficulty = $question->difficulty;
+        $this->level = $question->level;
     }
 
     public function update(QuestionService $service)
@@ -50,6 +53,7 @@ class Edit extends Component
             'answer_longitude' => $this->answer_longitude,
             'tolerance_meters' => $this->tolerance_meters,
             'difficulty' => $this->difficulty,
+            'level' => $this->level,
         ]);
 
         session()->flash('success', 'Question updated successfully.');

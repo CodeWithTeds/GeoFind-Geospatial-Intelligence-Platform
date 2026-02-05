@@ -33,17 +33,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchQuestion() {
     try {
+        const targetLevel = window.AppConfig.targetLevel;
+        let url = '/api/questions';
+        
+        if (targetLevel) {
+            url = `/api/questions/level/${targetLevel}`;
+        }
+
         // Fetch questions from API
-        const response = await fetch('/api/questions');
+        const response = await fetch(url);
         if (!response.ok) throw new Error('Network response was not ok');
         
         const data = await response.json();
-        const questions = data.data || data; // Handle pagination or direct array
         
-        if (questions && questions.length > 0) {
-            // Get the most recent question
-            const question = questions[questions.length - 1];
-            
+        let question;
+        if (targetLevel) {
+            question = data;
+        } else {
+            const questions = data.data || data; // Handle pagination or direct array
+            if (questions && questions.length > 0) {
+                // Get the most recent question
+                question = questions[questions.length - 1];
+            }
+        }
+        
+        if (question) {
             // Update UI
             document.getElementById('question-title').textContent = question.title;
             document.getElementById('question-description').textContent = question.description;

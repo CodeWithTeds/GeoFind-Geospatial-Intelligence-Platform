@@ -34,11 +34,15 @@ Route::middleware('guest:web')->group(function () {
     Route::post('register', [RegisterController::class, 'store']);
 });
 
+use App\Http\Controllers\Client\LevelController;
+
 // Client Dashboard
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('client.dashboard');
     })->name('dashboard');
+    
+    Route::get('/levels', [LevelController::class, 'index'])->name('levels');
 });
 
 Route::post('logout', [ClientLoginController::class, 'destroy'])
@@ -46,9 +50,9 @@ Route::post('logout', [ClientLoginController::class, 'destroy'])
     ->name('logout');
 
 // Protected Game Route
-Route::get('/play', function () {
-    return view('play');
-})->middleware(['auth'])->name('play');
+Route::get('/play', [LevelController::class, 'play'])
+    ->middleware(['auth'])
+    ->name('play');
 
 // Admin Auth Routes
 Route::prefix('admin')->group(function () {
@@ -66,7 +70,7 @@ Route::prefix('admin')->group(function () {
         Route::prefix('questions')->name('admin.questions.')->group(function () {
             Route::get('/', \App\Livewire\Admin\Questions\Index::class)->name('index');
             Route::get('/create', \App\Livewire\Admin\Questions\Create::class)->name('create');
-            Route::get('/{id}/edit', \App\Livewire\Admin\Questions\Edit::class)->name('edit');
+            Route::get('/{question}/edit', \App\Livewire\Admin\Questions\Edit::class)->name('edit');
         });
 
         // Location Routes (Protected)

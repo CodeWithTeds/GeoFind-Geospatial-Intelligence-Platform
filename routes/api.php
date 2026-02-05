@@ -40,4 +40,5 @@ Route::middleware(['throttle:api'])->prefix('locations')->group(function () {
 });
 
 // Question Routes
+Route::get('questions/level/{level}', [QuestionController::class, 'getByLevel'])->middleware('throttle:api');
 Route::middleware(['throttle:api'])->apiResource('questions', QuestionController::class);

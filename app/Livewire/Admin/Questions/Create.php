@@ -15,6 +15,7 @@ class Create extends Component
     public $answer_longitude;
     public $tolerance_meters = 50;
     public $difficulty = 'medium';
+    public $level = 1;
 
     protected $rules = [
         'title' => 'required|string|max:255',
@@ -23,6 +24,7 @@ class Create extends Component
         'answer_longitude' => 'required|numeric|between:-180,180',
         'tolerance_meters' => 'required|integer|min:1',
         'difficulty' => 'required|in:easy,medium,hard',
+        'level' => 'required|integer|min:1',
     ];
 
     public function save(QuestionService $service)
@@ -36,6 +38,7 @@ class Create extends Component
             'answer_longitude' => $this->answer_longitude,
             'tolerance_meters' => $this->tolerance_meters,
             'difficulty' => $this->difficulty,
+            'level' => $this->level,
         ]);
 
         session()->flash('success', 'Question created successfully.');

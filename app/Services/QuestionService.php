@@ -31,6 +31,11 @@ class QuestionService
         });
     }
 
+    public function getQuestionByLevel(int $level): ?Model
+    {
+        return $this->repository->findByLevel($level);
+    }
+
     public function createQuestion(array $data): Model
     {
         $question = $this->repository->create($data);

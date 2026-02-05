@@ -69,6 +69,7 @@
     <!-- Global App Config -->
     <script>
         window.AppConfig = {
+            targetLevel: {{ request('level') ?? 'null' }},
             // cesium token removed for security
         }
     </script>

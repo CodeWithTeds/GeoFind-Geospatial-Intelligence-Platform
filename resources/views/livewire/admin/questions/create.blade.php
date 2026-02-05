@@ -161,6 +161,19 @@
                             </div>
 
                             <div>
+                                <label for="level" class="block text-sm font-medium text-gray-700 mb-2">Level</label>
+                                <div class="relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-400 material-icons text-sm">stairs</span>
+                                    </div>
+                                    <input type="number" wire:model="level" id="level" placeholder="1" min="1"
+                                        class="pl-10 w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors py-3 text-gray-900 placeholder-gray-400 @error('level') border-red-300 focus:border-red-500 focus:ring-red-500 @enderror">
+                                </div>
+                                <p class="mt-1 text-xs text-gray-500">The numeric level associated with this question.</p>
+                                @error('level') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
+                            </div>
+
+                            <div>
                                 <label for="tolerance_meters" class="block text-sm font-medium text-gray-700 mb-2">Tolerance (Meters)</label>
                                 <div class="relative rounded-md shadow-sm">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

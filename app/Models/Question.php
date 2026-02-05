@@ -15,6 +15,7 @@ class Question extends Model
         'answer_longitude',
         'tolerance_meters',
         'difficulty',
+        'level',
         'description',
     ];
 

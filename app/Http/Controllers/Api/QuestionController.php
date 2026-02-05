@@ -38,6 +38,23 @@ class QuestionController extends Controller
         return response()->json($question);
     }
 
+    public function getByLevel(int $level): JsonResponse
+    {
+        /** @var \App\Models\User $user */
+        $user = request()->user();
+        
+        // If API route is authenticated, check permission
+        if ($user && $level > $user->completed_levels + 1) {
+            return response()->json(['message' => 'Level locked'], 403);
+        }
+
+        $question = $this->service->getQuestionByLevel($level);
+        if (!$question) {
+            return response()->json(['message' => 'Level not found'], 404);
+        }
+        return response()->json($question);
+    }
+
     public function update(UpdateQuestionRequest $request, int $id): JsonResponse
     {
         $updated = $this->service->updateQuestion($id, $request->validated());

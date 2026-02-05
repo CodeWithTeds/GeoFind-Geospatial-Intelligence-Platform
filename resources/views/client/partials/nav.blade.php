@@ -13,7 +13,7 @@
 
     <!-- Navigation Items -->
     <div id="nav-links" class="hidden md:flex gap-12 items-center">
-        <a href="{{ route('play') }}" class="text-sm font-bold text-gray-300 uppercase tracking-[0.2em] hover:text-yellow-500 hover:drop-shadow-[0_0_8px_rgba(234,179,8,0.8)] transition-all duration-300 relative group">
+        <a href="{{ route('levels') }}" class="text-sm font-bold text-gray-300 uppercase tracking-[0.2em] hover:text-yellow-500 hover:drop-shadow-[0_0_8px_rgba(234,179,8,0.8)] transition-all duration-300 relative group">
             Single Player
             <span class="absolute -bottom-2 left-0 w-0 h-0.5 bg-yellow-500 transition-all duration-300 group-hover:w-full box-shadow-[0_0_5px_rgba(234,179,8,0.8)]"></span>
         </a>

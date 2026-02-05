@@ -19,6 +19,7 @@ class StoreQuestionRequest extends FormRequest
             'answer_longitude' => 'required|numeric|between:-180,180',
             'tolerance_meters' => 'required|integer|min:0',
             'difficulty' => 'required|in:easy,medium,hard',
+            'level' => 'required|integer|min:1',
             'description' => 'nullable|string',
         ];
     }
