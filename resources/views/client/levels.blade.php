@@ -83,7 +83,7 @@
                 Mission Selection
             </h1>
 
-            <div class="flex-1 w-full overflow-x-auto overflow-y-visible md:overflow-y-hidden scrollbar-hide p-4 pt-16 pb-8 touch-pan-x">
+            <div class="flex-1 w-full overflow-x-auto overflow-y-visible md:overflow-y-hidden scrollbar-hide p-4 pt-16 pb-8">
                 <div class="flex flex-nowrap gap-6 md:gap-8 px-4 min-w-max">
                     @forelse($levels as $level)
                         <!-- Hanging Level Card -->

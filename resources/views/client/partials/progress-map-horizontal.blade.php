@@ -1,6 +1,6 @@
 <div class="w-full mb-6">
     <!-- Horizontal Road Container -->
-    <div class="relative w-full overflow-x-auto scrollbar-hide py-4 touch-pan-x" id="progress-scroll-container">
+    <div class="relative w-full overflow-x-auto scrollbar-hide py-4" id="progress-scroll-container">
 
         @php
         // Configuration for the Road
