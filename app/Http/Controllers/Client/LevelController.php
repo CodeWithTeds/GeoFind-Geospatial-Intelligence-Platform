@@ -10,11 +10,10 @@ use Illuminate\View\View;
 
 class LevelController extends Controller
 {
-    protected $levelService;
+    
 
-    public function __construct(LevelService $levelService)
+    public function __construct(protected LevelService $levelService)
     {
-        $this->levelService = $levelService;
     }
 
     public function index(): View
@@ -32,7 +31,14 @@ class LevelController extends Controller
         if ($level) {
             /** @var \App\Models\User $user */
             $user = Auth::user();
+            
+            // Prevent accessing future levels
             if ($level > $user->completed_levels + 1) {
+                return redirect()->route('levels');
+            }
+
+            // Prevent replaying completed levels
+            if ($level <= $user->completed_levels) {
                 return redirect()->route('levels');
             }
         }

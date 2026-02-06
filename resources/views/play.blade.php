@@ -44,7 +44,7 @@
 
             <h2 id="question-title" class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4 font-['Chakra_Petch'] uppercase tracking-wide leading-tight drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">Initializing...</h2>
             
-            <p id="question-description" class="text-gray-300 text-xs md:text-sm leading-relaxed font-['Chakra_Petch'] border-l-2 border-yellow-500 pl-3 md:pl-4 py-1 mb-4 md:mb-6 max-h-[120px] md:max-h-[150px] overflow-y-auto">
+            <p id="question-description" class="text-gray-300 text-sm md:text-base leading-relaxed mb-4 md:mb-6 font-mono border-l-2 border-yellow-500/30 pl-3 md:pl-4">
                 Establishing secure connection to mission control...
             </p>
             
@@ -60,17 +60,63 @@
             </div>
             
             <button id="confirm-question-btn" class="group relative w-full overflow-hidden bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-3 md:py-3 px-4 transition-all duration-300 font-['Chakra_Petch'] text-base md:text-lg uppercase tracking-[0.15em] hover:shadow-[0_0_20px_rgba(234,179,8,0.6)] rounded active:scale-95">
-                <span class="relative z-10">ACKNOWLEDGE MISSION</span>
+                <span class="relative z-10">ACCEPT MISSION</span>
                 <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
             </button>
         </div>
     </div>
 
+    <!-- Submit Button (Hidden Initially) -->
+    <div id="submit-container" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 translate-y-24 opacity-0">
+        <button id="submit-answer-btn" class="bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-8 rounded-full shadow-[0_0_20px_rgba(22,163,74,0.6)] font-['Chakra_Petch'] text-lg uppercase tracking-widest transition-all hover:scale-105 active:scale-95 border-2 border-green-400">
+            LOCK IN COORDINATES
+        </button>
+    </div>
+
+    <!-- Result Modal (Hidden Initially) -->
+    <div id="result-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-500">
+        <div class="bg-zinc-900 border-2 border-yellow-500/50 p-8 rounded-2xl max-w-md w-full mx-4 shadow-[0_0_50px_rgba(234,179,8,0.2)] transform scale-90 transition-transform duration-300" id="result-content">
+            
+            <div class="text-center mb-6">
+                <h3 id="result-title" class="text-3xl font-black text-white uppercase tracking-tighter mb-2 font-['Chakra_Petch']">MISSION REPORT</h3>
+                <div class="h-1 w-24 bg-yellow-500 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Stars Container -->
+            <div id="stars-container" class="flex justify-center gap-2 mb-8">
+                <!-- Stars will be injected here -->
+            </div>
+
+            <div class="space-y-4 mb-8">
+                <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                    <span class="text-gray-400 font-mono text-sm uppercase">Distance Error</span>
+                    <span id="result-distance" class="text-yellow-400 font-bold font-mono text-xl">0 m</span>
+                </div>
+                <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                    <span class="text-gray-400 font-mono text-sm uppercase">Status</span>
+                    <span id="result-status" class="text-green-500 font-bold uppercase tracking-wider">SUCCESS</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-3">
+                <a href="/levels" class="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-3 px-4 rounded text-center uppercase tracking-widest transition-colors font-['Chakra_Petch']">
+                    Return to Base
+                </a>
+                <button id="view-map-btn" class="w-full bg-transparent border border-white/20 hover:bg-white/10 text-white font-bold py-2 px-4 rounded text-center uppercase tracking-widest transition-colors text-sm">
+                    Review Map
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mission Failed Modal -->
+    @include('client.partials.mission-failed-modal')
+
     <!-- Global App Config -->
     <script>
         window.AppConfig = {
-            targetLevel: Number("{{ request('level') }}") || null,
-            // cesium token removed for security
+            targetLevel: Number(@json(request('level'))) || null,
+            csrfToken: "{{ csrf_token() }}",
         }
     </script>
 </body>

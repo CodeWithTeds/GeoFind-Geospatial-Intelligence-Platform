@@ -133,15 +133,31 @@
                                         @endif
                                     </div>
 
-                                    <!-- Play Button -->
+                                    <!-- Play Button / Status -->
                                     <div class="w-full mt-2">
-                                        <a href="{{ route('play', ['level' => $level['level']]) }}" 
-                                           class="block w-full py-2 rounded-lg font-black uppercase tracking-wider text-sm text-center shadow-lg transition-all transform hover:translate-y-px active:translate-y-1
-                                           {{ $level['status'] === 'completed' 
-                                              ? 'bg-green-500 text-white shadow-green-500/30 hover:bg-green-600 border-b-4 border-green-700' 
-                                              : 'bg-red-500 text-white shadow-red-500/30 hover:bg-red-600 border-b-4 border-red-700' }}">
-                                            {{ $level['status'] === 'completed' ? 'Replay' : 'Play' }}
-                                        </a>
+                                        @if($level['status'] === 'completed')
+                                            <div class="flex flex-col items-center space-y-2">
+                                                <!-- Stars Display -->
+                                                <div class="flex items-center justify-center space-x-1 mb-1">
+                                                    @for($i = 0; $i < 3; $i++)
+                                                        @if($i < ($level['stars'] ?? 0))
+                                                            <svg class="w-6 h-6 text-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.5)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                                        @else
+                                                            <svg class="w-6 h-6 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                                        @endif
+                                                    @endfor
+                                                </div>
+                                                
+                                                <button disabled class="block w-full py-2 rounded-lg font-black uppercase tracking-wider text-sm text-center bg-green-100 text-green-700 border-b-4 border-green-200 cursor-default opacity-80">
+                                                    Completed
+                                                </button>
+                                            </div>
+                                        @else
+                                            <a href="{{ route('play', ['level' => $level['level']]) }}" 
+                                               class="block w-full py-2 rounded-lg font-black uppercase tracking-wider text-sm text-center shadow-lg transition-all transform hover:translate-y-px active:translate-y-1 bg-red-500 text-white shadow-red-500/30 hover:bg-red-600 border-b-4 border-red-700">
+                                                Play
+                                            </a>
+                                        @endif
                                     </div>
                                 @endif
                             </div>

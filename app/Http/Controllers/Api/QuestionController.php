@@ -55,6 +55,45 @@ class QuestionController extends Controller
         return response()->json($question);
     }
 
+    public function submitAnswer(\Illuminate\Http\Request $request): JsonResponse
+    {
+        $request->validate([
+            'question_id' => 'required|integer|exists:questions,id',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+        ]);
+
+        /** @var \App\Models\User $user */
+        $user = $request->user();
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
+        try {
+            $result = $this->service->submitAnswer(
+                $user,
+                $request->input('question_id'),
+                $request->input('latitude'),
+                $request->input('longitude')
+            );
+            return response()->json($result);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            throw $e;
+        } catch (\Exception $e) {
+            // Log the actual error for admins
+            \Illuminate\Support\Facades\Log::error("Submission Error: " . $e->getMessage());
+            
+            // Return a sanitized message for users
+            // Allow specific logic messages, hide system errors
+            $safeMessages = ['Question not found', 'Unauthorized: Level is locked.'];
+            $message = in_array($e->getMessage(), $safeMessages) 
+                ? $e->getMessage() 
+                : 'An unexpected error occurred.';
+                
+            return response()->json(['message' => $message], 400);
+        }
+    }
+
     public function update(UpdateQuestionRequest $request, int $id): JsonResponse
     {
         $updated = $this->service->updateQuestion($id, $request->validated());

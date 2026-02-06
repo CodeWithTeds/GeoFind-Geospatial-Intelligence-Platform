@@ -3,6 +3,7 @@
 namespace App\Services\Game;
 
 use App\Repositories\Contracts\QuestionRepositoryInterface;
+use App\Models\UserAnswer;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,16 +25,26 @@ class LevelService
     {
         $user = Auth::user();
         $completedLevels = $user->completed_levels;
-        
+
         // Fetch all questions, ordered by level
         $questions = $this->questionRepository->all()->sortBy('level');
 
-        return $questions->map(function ($question) use ($completedLevels) {
+        // Fetch user's answers to get stars
+        $userAnswers = UserAnswer::where('user_id', $user->id)
+            ->where('is_correct', true)
+            ->get()
+            ->keyBy('question_id');
+
+        return $questions->map(function ($question) use ($completedLevels, $userAnswers) {
             $levelNumber = $question->level;
-            
+            $stars = 0;
+
             // Determine status
             if ($levelNumber <= $completedLevels) {
                 $status = 'completed';
+                if (isset($userAnswers[$question->id])) {
+                    $stars = $userAnswers[$question->id]->stars;
+                }
             } elseif ($levelNumber == $completedLevels + 1) {
                 $status = 'unlocked';
             } else {
@@ -47,6 +58,7 @@ class LevelService
                 'difficulty' => $question->difficulty,
                 'status' => $status,
                 'description' => $question->description,
+                'stars' => $stars,
             ];
         });
     }
@@ -60,7 +72,7 @@ class LevelService
     {
         $user = Auth::user();
         $totalLevels = $this->questionRepository->all()->count();
-        
+
         if ($totalLevels === 0) {
             return 0;
         }

@@ -1,6 +1,12 @@
 <div>
     @section('title', 'Edit Question')
 
+    @assets
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.114/Build/Cesium/Cesium.js"></script>
+    @vite(['resources/js/admin/questions/edit.js'])
+    @endassets
+
     <div class="mb-6">
         <nav class="flex mb-4" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
@@ -29,9 +35,50 @@
         <p class="text-gray-600 mt-1">Update details for "{{ $question->title }}"</p>
     </div>
 
-    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        <form wire:submit="update" class="p-6 md:p-8 space-y-8">
-            <!-- Section 1: Basic Info -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Left Column: Map -->
+        <div class="lg:col-span-1 space-y-4" x-data="{ isExpanded: false }">
+            <div 
+                class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden transition-all duration-300"
+                :class="isExpanded ? 'fixed inset-0 z-[100] rounded-none' : 'p-4'"
+            >
+                <div class="flex justify-between items-start mb-4" :class="isExpanded ? 'absolute top-4 left-4 z-[101] bg-white/90 p-2 rounded-lg shadow-lg backdrop-blur' : ''">
+                    <div :class="isExpanded ? 'hidden' : ''">
+                        <h3 class="text-lg font-semibold text-gray-900">Location Picker</h3>
+                        <p class="text-sm text-gray-500">Click on the map to pin the answer location.</p>
+                    </div>
+                    
+                    <button 
+                        @click="isExpanded = !isExpanded"
+                        type="button"
+                        class="text-gray-500 hover:text-gray-700 focus:outline-none p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                        :title="isExpanded ? 'Exit Fullscreen' : 'Enter Fullscreen'"
+                    >
+                        <span class="material-icons" x-text="isExpanded ? 'close_fullscreen' : 'open_in_full'"></span>
+                    </button>
+                </div>
+
+                <div 
+                    wire:ignore 
+                    id="cesiumContainer" 
+                    class="bg-gray-100 relative transition-all duration-300"
+                    :class="isExpanded ? 'w-full h-full' : 'w-full h-[500px] rounded-lg'"
+                    x-data="questionMap({
+                        initialLat: @json($answer_latitude),
+                        initialLng: @json($answer_longitude),
+                        tilesetId: 96188
+                    })"
+                >
+                    <!-- Cesium will render here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Form -->
+        <div class="lg:col-span-2">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <form wire:submit="update" class="p-6 md:p-8 space-y-8">
+                    <!-- Section 1: Basic Info -->
             <div class="border-b border-gray-100 pb-6">
                 <div class="flex items-center mb-4">
                     <div class="bg-blue-100 text-blue-600 rounded-full h-8 w-8 flex items-center justify-center mr-3">
@@ -153,5 +200,7 @@
                 </button>
             </div>
         </form>
+    </div>
+        </div>
     </div>
 </div>

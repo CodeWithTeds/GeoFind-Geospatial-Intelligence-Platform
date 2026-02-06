@@ -67,7 +67,7 @@ export function initAdminMapPicker(config) {
                 disableDepthTestDistance: Number.POSITIVE_INFINITY, // Always on top
             },
             label: {
-                text: `Lat: ${lat.toFixed(6)}, Lng: ${lng.toFixed(6)}`,
+                text: `Latitude: ${lat.toFixed(6)} | Longitude: ${lng.toFixed(6)}`,
                 font: '14px sans-serif',
                 fillColor: Cesium.Color.WHITE,
                 outlineColor: Cesium.Color.BLACK,
@@ -110,7 +110,13 @@ export function initAdminMapPicker(config) {
             addPin(lat, lng);
 
             if (onLocationPicked) {
-                onLocationPicked(lat, lng);
+                // Pass full precision but also rounded if needed by the consumer
+                // For now, we'll stick to full precision as requested by standard GIS practices
+                // But the user complained about "14.582710987897379" appearing in "edit"
+                // which implies they want the INPUT values to be cleaner.
+                
+                // Let's pass formatted strings to the callback to ensure inputs match the label
+                onLocationPicked(lat.toFixed(6), lng.toFixed(6));
             }
         }
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK);

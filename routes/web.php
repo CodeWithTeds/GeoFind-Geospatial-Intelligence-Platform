@@ -29,19 +29,23 @@ Route::middleware('guest:web')->group(function () {
     Route::get('login', Login::class)
         ->middleware([IpControlMiddleware::class])
         ->name('login');
-    
+
     Route::get('register', Register::class)->name('register');
     Route::post('register', [RegisterController::class, 'store']);
 });
 
 use App\Http\Controllers\Client\LevelController;
+use App\Http\Controllers\Api\QuestionController;
 
 // Client Dashboard
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('/dashboard', function (\Illuminate\Http\Request $request) {
+        if ($request->user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
         return view('client.dashboard');
     })->name('dashboard');
-    
+
     Route::get('/levels', [LevelController::class, 'index'])->name('levels');
 });
 
@@ -54,12 +58,26 @@ Route::get('/play', [LevelController::class, 'play'])
     ->middleware(['auth'])
     ->name('play');
 
+Route::post('/play/submit', [QuestionController::class, 'submitAnswer'])
+    ->middleware(['auth'])
+    ->name('play.submit');
+
+// Debug route removed for security (CSRF risk)
+// Route::get('/play/reset-answer/{questionId}', ...)
+
+Route::get('/debug/questions', function () {
+    return \App\Models\Question::all();
+});
+
 // Admin Auth Routes
 Route::prefix('admin')->group(function () {
-    Route::get('login', [LoginController::class, 'create'])->name('admin.login');
-    Route::post('login', [LoginController::class, 'store'])
-        ->middleware('throttle:login')
-        ->name('admin.login.store');
+    Route::middleware('guest')->group(function () {
+        Route::get('login', [LoginController::class, 'create'])->name('admin.login');
+        Route::post('login', [LoginController::class, 'store'])
+            ->middleware('throttle:login')
+            ->name('admin.login.store');
+    });
+
     Route::post('logout', [LoginController::class, 'destroy'])->name('admin.logout');
 
     // Admin Dashboard (Protected)
@@ -75,7 +93,7 @@ Route::prefix('admin')->group(function () {
 
         // Location Routes (Protected)
         Route::resource('locations', LocationController::class)->names('admin.locations');
-        
+
         Route::post('/calculate-distance', [LocationController::class, 'calculateDistance'])->name('admin.locations.calculate-distance');
         Route::post('/calculate-midpoint', [LocationController::class, 'calculateMidpoint'])->name('admin.locations.calculate-midpoint');
         Route::post('/find-points-in-radius', [LocationController::class, 'findPointInRadius'])->name('admin.locations.find-points-in-radius');

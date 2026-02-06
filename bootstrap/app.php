@@ -13,7 +13,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->trustProxies(at: '*');
+        // Security: Do not trust all proxies in production unless behind a specific load balancer.
+        // $middleware->trustProxies(at: '*'); 
         $middleware->redirectGuestsTo(function (Request $request) {
             if ($request->is('admin*')) {
                 return route('admin.login');
@@ -24,7 +25,12 @@ return Application::configure(basePath: dirname(__DIR__))
         // Redirect authenticated users
         $middleware->redirectTo(
             guests: '/login',
-            users: '/dashboard'
+            users: function (Request $request) {
+                if ($request->user() && $request->user()->role === 'admin') {
+                    return route('admin.dashboard');
+                }
+                return route('dashboard');
+            }
         );
     })
     ->withExceptions(function (Exceptions $exceptions) {
