@@ -73,44 +73,11 @@
         </button>
     </div>
 
-    <!-- Result Modal (Hidden Initially) -->
-    <div id="result-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-500">
-        <div class="bg-zinc-900 border-2 border-yellow-500/50 p-8 rounded-2xl max-w-md w-full mx-4 shadow-[0_0_50px_rgba(234,179,8,0.2)] transform scale-90 transition-transform duration-300" id="result-content">
-            
-            <div class="text-center mb-6">
-                <h3 id="result-title" class="text-3xl font-black text-white uppercase tracking-tighter mb-2 font-['Chakra_Petch']">MISSION REPORT</h3>
-                <div class="h-1 w-24 bg-yellow-500 mx-auto rounded-full"></div>
-            </div>
-
-            <!-- Stars Container -->
-            <div id="stars-container" class="flex justify-center gap-2 mb-8">
-                <!-- Stars will be injected here -->
-            </div>
-
-            <div class="space-y-4 mb-8">
-                <div class="flex justify-between items-center border-b border-white/10 pb-2">
-                    <span class="text-gray-400 font-mono text-sm uppercase">Distance Error</span>
-                    <span id="result-distance" class="text-yellow-400 font-bold font-mono text-xl">0 m</span>
-                </div>
-                <div class="flex justify-between items-center border-b border-white/10 pb-2">
-                    <span class="text-gray-400 font-mono text-sm uppercase">Status</span>
-                    <span id="result-status" class="text-green-500 font-bold uppercase tracking-wider">SUCCESS</span>
-                </div>
-            </div>
-
-            <div class="flex flex-col gap-3">
-                <a href="/levels" class="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-3 px-4 rounded text-center uppercase tracking-widest transition-colors font-['Chakra_Petch']">
-                    Return to Base
-                </a>
-                <button id="view-map-btn" class="w-full bg-transparent border border-white/20 hover:bg-white/10 text-white font-bold py-2 px-4 rounded text-center uppercase tracking-widest transition-colors text-sm">
-                    Review Map
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- Mission Failed Modal -->
     @include('client.partials.mission-failed-modal')
+    
+    <!-- Mission Success Modal -->
+    @include('client.partials.mission-success-modal')
 
     <!-- Global App Config -->
     <script>

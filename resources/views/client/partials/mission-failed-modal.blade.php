@@ -3,9 +3,7 @@
     <div class="absolute inset-0 bg-black/80 backdrop-blur-[2px] pointer-events-auto"></div>
 
     <div class="relative z-10 flex flex-col items-center text-center p-4 w-full max-w-4xl pointer-events-auto">
-        <!-- Image/Icon (Optional) -->
-        <img src="{{ asset('images/findjerks.png') }}" class="w-24 h-24 md:w-32 md:h-32 mb-6 opacity-80 grayscale contrast-125 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)]" alt="Failed">
-
+        
         <!-- Title -->
         <h1 class="text-5xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-red-500 to-red-900 font-['Chakra_Petch'] tracking-tighter uppercase mb-6 drop-shadow-[0_0_25px_rgba(220,38,38,0.6)] animate-pulse">
             MISSION FAILED
