@@ -22,13 +22,13 @@ class SecurityHeadersMiddleware
         // Allows styles from self, unsafe-inline (for Tailwind/dynamic styles), and Google Fonts
         // Allows fonts from self, Google Fonts, and Cloudflare
         $csp = "default-src 'self'; " .
-               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://challenges.cloudflare.com https://*.cloudflare.com https://unpkg.com https://cesium.com; " .
-               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com https://cesium.com; " .
-               "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; " .
-               "img-src 'self' data: https://* blob:; " . // Blob needed for Cesium/Maps
-               "connect-src 'self' https://challenges.cloudflare.com https://*.cloudflare.com https://api.mapbox.com https://events.mapbox.com https://*.cesium.com blob:; " .
-               "frame-src 'self' https://challenges.cloudflare.com https://*.cloudflare.com; " .
-               "worker-src 'self' blob:;";
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://challenges.cloudflare.com https://*.cloudflare.com https://unpkg.com https://cesium.com https://dev.virtualearth.net https://*.virtualearth.net; " .
+            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com https://cesium.com; " .
+            "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; " .
+            "img-src 'self' data: https://* blob:; " . // Blob needed for Cesium/Maps
+            "connect-src 'self' https://challenges.cloudflare.com https://*.cloudflare.com https://api.mapbox.com https://events.mapbox.com https://*.cesium.com https://cesium.com https://dev.virtualearth.net https://*.virtualearth.net blob:; " .
+            "frame-src 'self' https://challenges.cloudflare.com https://*.cloudflare.com; " .
+            "worker-src 'self' blob: https://cesium.com;";
 
         $response->headers->set('Content-Security-Policy', $csp);
         $response->headers->set('X-Frame-Options', 'DENY');
