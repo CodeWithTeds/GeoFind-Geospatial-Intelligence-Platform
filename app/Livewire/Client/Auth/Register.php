@@ -23,6 +23,21 @@ class Register extends Component
     public string $password = '';
     public string $password_confirmation = '';
     public string $turnstileToken = '';
+    public int $secondsRemaining = 0;
+
+    public function render()
+    {
+        // Pre-check rate limits for UI feedback
+        $throttleKey = 'register.ip.' . request()->ip();
+
+        if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
+            $this->secondsRemaining = RateLimiter::availableIn($throttleKey);
+        } else {
+            $this->secondsRemaining = 0;
+        }
+
+        return view('livewire.client.auth.register');
+    }
 
     public function updated($propertyName)
     {
@@ -92,6 +107,7 @@ class Register extends Component
 
         if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
             $seconds = RateLimiter::availableIn($throttleKey);
+            $this->secondsRemaining = $seconds;
             Log::warning("Registration rate limit exceeded for IP: " . request()->ip());
             $this->addError('email', "Too many attempts. Please try again in {$seconds} seconds.");
             return;
@@ -125,14 +141,11 @@ class Register extends Component
             RateLimiter::clear($throttleKey);
             return redirect()->route('dashboard');
         } catch (\Exception $e) {
-            RateLimiter::hit($throttleKey, 300); // 5 minutes penalty for failed registration
+            RateLimiter::hit($throttleKey, 900); // 15 minutes penalty for failed registration
             Log::error("Registration error: " . $e->getMessage());
             $this->addError('email', 'Registration failed. Please try again.');
         }
     }
 
-    public function render()
-    {
-        return view('livewire.client.auth.register');
-    }
+
 }

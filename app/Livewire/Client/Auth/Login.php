@@ -21,6 +21,24 @@ class Login extends Component
     public string $password = '';
     public bool $remember = false;
     public string $turnstileToken = '';
+    public int $secondsRemaining = 0;
+
+    public function render()
+    {
+        // Pre-check rate limits for UI feedback
+        $ipThrottleKey = 'login.ip.' . request()->ip();
+        $emailThrottleKey = 'login.email.' . strtolower($this->email);
+
+        if (RateLimiter::tooManyAttempts($ipThrottleKey, 5)) {
+            $this->secondsRemaining = RateLimiter::availableIn($ipThrottleKey);
+        } elseif (!empty($this->email) && RateLimiter::tooManyAttempts($emailThrottleKey, 5)) {
+            $this->secondsRemaining = RateLimiter::availableIn($emailThrottleKey);
+        } else {
+            $this->secondsRemaining = 0;
+        }
+
+        return view('livewire.client.auth.login');
+    }
 
     protected function rules()
     {
@@ -55,6 +73,7 @@ class Login extends Component
 
         if (RateLimiter::tooManyAttempts($ipThrottleKey, 5)) {
             $seconds = RateLimiter::availableIn($ipThrottleKey);
+            $this->secondsRemaining = $seconds;
             Log::warning("Login IP rate limit exceeded: " . request()->ip());
             $this->addError('email', "Too many requests. Please try again in {$seconds} seconds.");
             return;
@@ -62,6 +81,7 @@ class Login extends Component
 
         if (RateLimiter::tooManyAttempts($emailThrottleKey, 5)) {
             $seconds = RateLimiter::availableIn($emailThrottleKey);
+            $this->secondsRemaining = $seconds;
             Log::warning("Login Email rate limit exceeded: {$this->email}");
             $this->addError('email', "Too many login attempts for this account. Please try again in {$seconds} seconds.");
             return;
@@ -98,19 +118,16 @@ class Login extends Component
             return redirect()->route('dashboard');
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Hit rate limiter on failed login attempt (wrong credentials)
-            RateLimiter::hit($ipThrottleKey, 300); // 5 minutes penalty
-            RateLimiter::hit($emailThrottleKey, 300);
+            RateLimiter::hit($ipThrottleKey, 900); // 15 minutes penalty
+            RateLimiter::hit($emailThrottleKey, 900);
             $this->addError('email', $e->getMessage());
         } catch (\Exception $e) {
-            RateLimiter::hit($ipThrottleKey, 300);
-            RateLimiter::hit($emailThrottleKey, 300);
+            RateLimiter::hit($ipThrottleKey, 900);
+            RateLimiter::hit($emailThrottleKey, 900);
             Log::error("Login error: " . $e->getMessage());
             $this->addError('email', 'Authentication failed. Please try again.');
         }
     }
 
-    public function render()
-    {
-        return view('livewire.client.auth.login');
-    }
+
 }
