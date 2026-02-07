@@ -102,8 +102,11 @@ class Register extends Component
     {
         $this->turnstileToken = trim($this->turnstileToken);
         
-        // Rate limit by IP (5 attempts per minute)
+        // Rate limit by IP (5 attempts per 15 minutes)
         $throttleKey = 'register.ip.' . request()->ip();
+
+        // Log attempts for debugging
+        Log::info("Register attempt from IP: " . request()->ip() . " | Attempts: " . RateLimiter::attempts($throttleKey));
 
         if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
             $seconds = RateLimiter::availableIn($throttleKey);
@@ -124,7 +127,8 @@ class Register extends Component
         try {
             $validatedData = $this->validate();
         } catch (\Illuminate\Validation\ValidationException $e) {
-            RateLimiter::hit($throttleKey, 60); // 1 minute decay for validation errors
+            // Hit rate limiter on validation error (counts as 1 attempt)
+            RateLimiter::hit($throttleKey, 900); // 15 minutes decay
             $this->dispatch('reset-turnstile');
             throw $e;
         }
@@ -138,7 +142,8 @@ class Register extends Component
                 request()->ip()
             );
 
-            RateLimiter::clear($throttleKey);
+            // Do NOT clear rate limiter on registration success to prevent mass account creation
+            // RateLimiter::clear($throttleKey);
             return redirect()->route('dashboard');
         } catch (\Exception $e) {
             RateLimiter::hit($throttleKey, 900); // 15 minutes penalty for failed registration

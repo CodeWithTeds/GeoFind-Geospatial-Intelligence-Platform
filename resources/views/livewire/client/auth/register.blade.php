@@ -65,9 +65,13 @@
         @script
         <script>
             window.turnstileCallback = (token) => {
-            $wire.set('turnstileToken', token);
-            window.dispatchEvent(new CustomEvent('turnstile-verified', { detail: { verified: !!token } }));
-        }
+                $wire.set('turnstileToken', token);
+                window.dispatchEvent(new CustomEvent('turnstile-verified', {
+                    detail: {
+                        verified: !!token
+                    }
+                }));
+            }
         </script>
         @endscript
         @error('turnstileToken')
@@ -79,8 +83,8 @@
         <button type="submit"
             wire:loading.attr="disabled"
             wire:target="register"
-                :disabled="submitting || {{ $secondsRemaining > 0 ? 'true' : 'false' }} || !turnstileVerified"
-                class="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-4 px-6 rounded uppercase tracking-[0.2em] transition-all duration-300 hover:shadow-[0_0_20px_rgba(234,179,8,0.5)] transform hover:-translate-y-1 mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none">
+            :disabled="submitting || {{ $secondsRemaining > 0 ? 'true' : 'false' }} || !turnstileVerified || {{ $errors->any() ? 'true' : 'false' }}"
+            class="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-4 px-6 rounded uppercase tracking-[0.2em] transition-all duration-300 hover:shadow-[0_0_20px_rgba(234,179,8,0.5)] transform hover:-translate-y-1 mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none">
             <span x-show="!submitting" wire:loading.remove wire:target="register">Initialize Profile</span>
             <span x-show="submitting" wire:loading wire:target="register" class="inline-flex items-center">
                 <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
