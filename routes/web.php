@@ -9,6 +9,8 @@ use App\Http\Controllers\Client\Auth\LoginController as ClientLoginController;
 use App\Livewire\Client\Auth\Login;
 use App\Http\Middleware\IpControlMiddleware;
 use App\Livewire\Client\Auth\Register;
+use App\Http\Controllers\Client\LevelController;
+use App\Http\Controllers\Api\QuestionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,8 +36,7 @@ Route::middleware('guest:web')->group(function () {
     Route::post('register', [RegisterController::class, 'store']);
 });
 
-use App\Http\Controllers\Client\LevelController;
-use App\Http\Controllers\Api\QuestionController;
+
 
 // Client Dashboard
 Route::middleware(['auth', 'verified'])->group(function () {

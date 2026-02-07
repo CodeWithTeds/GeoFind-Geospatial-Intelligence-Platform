@@ -3,11 +3,19 @@
 namespace App\Livewire\Client\Auth;
 
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 use App\Services\Auth\ClientAuthService;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules\Password;
 use App\Rules\Turnstile;
 
+#[Layout('components.layouts.auth', [
+    'title' => 'Register - Oxbit Access',
+    'header' => 'New Connection',
+    'pageTitle' => 'Initialize'
+])]
 class Register extends Component
 {
     public string $name = '';
@@ -77,31 +85,54 @@ class Register extends Component
 
     public function register()
     {
+        $this->turnstileToken = trim($this->turnstileToken);
+        
+        // Rate limit by IP (5 attempts per minute)
+        $throttleKey = 'register.ip.' . request()->ip();
+
+        if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
+            $seconds = RateLimiter::availableIn($throttleKey);
+            Log::warning("Registration rate limit exceeded for IP: " . request()->ip());
+            $this->addError('email', "Too many attempts. Please try again in {$seconds} seconds.");
+            return;
+        }
+
+        // Explicit server-side check for empty token in production
+        // We use !App::environment('local', 'testing') to ensure it runs in production/staging but not tests
+        if (!App::environment('local', 'testing') && empty($this->turnstileToken)) {
+            $this->addError('turnstileToken', 'Please complete the CAPTCHA verification.');
+            $this->dispatch('reset-turnstile');
+            return;
+        }
+
         try {
             $validatedData = $this->validate();
         } catch (\Illuminate\Validation\ValidationException $e) {
+            RateLimiter::hit($throttleKey, 60); // 1 minute decay for validation errors
             $this->dispatch('reset-turnstile');
             throw $e;
         }
 
-        // Resolve service from container manually or use method injection if supported by Livewire version
-        $authService = app(ClientAuthService::class);
+        try {
+            // Resolve service from container manually or use method injection if supported by Livewire version
+            $authService = app(ClientAuthService::class);
 
-        $authService->register(
-            $validatedData,
-            request()->ip()
-        );
+            $authService->register(
+                $validatedData,
+                request()->ip()
+            );
 
-        return redirect()->route('dashboard');
+            RateLimiter::clear($throttleKey);
+            return redirect()->route('dashboard');
+        } catch (\Exception $e) {
+            RateLimiter::hit($throttleKey, 300); // 5 minutes penalty for failed registration
+            Log::error("Registration error: " . $e->getMessage());
+            $this->addError('email', 'Registration failed. Please try again.');
+        }
     }
 
     public function render()
     {
-        return view('livewire.client.auth.register')
-            ->layout('components.layouts.auth', [
-                'title' => 'Register - Oxbit Access',
-                'header' => 'New Connection',
-                'pageTitle' => 'Initialize'
-            ]);
+        return view('livewire.client.auth.register');
     }
 }

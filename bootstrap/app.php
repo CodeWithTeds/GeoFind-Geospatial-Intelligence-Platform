@@ -13,6 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // Append Security Headers Middleware
+        $middleware->append(\App\Http\Middleware\SecurityHeadersMiddleware::class);
+
         // Security: Do not trust all proxies in production unless behind a specific load balancer.
         // $middleware->trustProxies(at: '*'); 
         $middleware->redirectGuestsTo(function (Request $request) {

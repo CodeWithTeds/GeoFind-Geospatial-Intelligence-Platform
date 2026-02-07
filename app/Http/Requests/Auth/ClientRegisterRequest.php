@@ -17,6 +17,18 @@ class ClientRegisterRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation()
+    {
+        if ($this->has('cf-turnstile-response')) {
+            $this->merge([
+                'cf-turnstile-response' => trim($this->input('cf-turnstile-response')),
+            ]);
+        }
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
@@ -30,7 +42,7 @@ class ClientRegisterRequest extends FormRequest
         ];
 
         // Apply Turnstile only in production/non-local environments and not during unit tests
-        if (!app()->environment('local') && !app()->runningUnitTests()) {
+        if (!app()->environment('local', 'testing')) {
             $rules['cf-turnstile-response'] = ['required', new Turnstile];
         }
 
