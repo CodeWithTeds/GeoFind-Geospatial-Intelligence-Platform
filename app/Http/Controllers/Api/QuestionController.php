@@ -10,11 +10,10 @@ use Illuminate\Http\JsonResponse;
 
 class QuestionController extends Controller
 {
-    protected $service;
+    
 
-    public function __construct(QuestionService $service)
+    public function __construct(protected QuestionService $service)
     {
-        $this->service = $service;
     }
 
     public function index(): JsonResponse

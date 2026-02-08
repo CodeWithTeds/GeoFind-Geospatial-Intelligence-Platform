@@ -67,8 +67,8 @@
     </div>
 
     <!-- Submit Button (Hidden Initially) -->
-    <div id="submit-container" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 translate-y-24 opacity-0">
-        <button id="submit-answer-btn" class="bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-8 rounded-full shadow-[0_0_20px_rgba(22,163,74,0.6)] font-['Chakra_Petch'] text-lg uppercase tracking-widest transition-all hover:scale-105 active:scale-95 border-2 border-green-400">
+    <div id="submit-container" class="fixed bottom-32 inset-x-0 flex justify-center z-[1000] transition-all duration-300 translate-y-24 opacity-0 pointer-events-none">
+        <button id="submit-answer-btn" class="pointer-events-auto bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-8 rounded-full shadow-[0_0_20px_rgba(22,163,74,0.6)] font-['Chakra_Petch'] text-lg uppercase tracking-widest transition-all hover:scale-105 active:scale-95 border-2 border-green-400">
             LOCK IN COORDINATES
         </button>
     </div>

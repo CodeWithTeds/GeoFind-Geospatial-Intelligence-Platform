@@ -351,7 +351,7 @@ function initializeMap() {
             // Show Submit Button
             const submitContainer = document.getElementById('submit-container');
             submitContainer.style.opacity = '1';
-            submitContainer.style.transform = 'translate(-50%, 0)';
+            submitContainer.style.transform = 'translateY(0)';
 
             // Add a pin at the clicked location
             currentPinEntity = viewer.entities.add({

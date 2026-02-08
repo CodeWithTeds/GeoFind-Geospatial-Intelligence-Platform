@@ -83,7 +83,7 @@
                 Mission Selection
             </h1>
 
-            <div class="flex-1 w-full overflow-x-auto overflow-y-visible md:overflow-y-hidden scrollbar-hide p-4 pt-16 pb-8">
+            <div id="levels-scroll-container" class="flex-1 w-full overflow-x-auto overflow-y-visible md:overflow-y-hidden scrollbar-hide p-4 pt-16 pb-8">
                 <div class="flex flex-nowrap gap-6 md:gap-8 px-4 min-w-max">
                     @forelse($levels as $level)
                         <!-- Hanging Level Card -->
@@ -199,6 +199,25 @@
                 navLinks.classList.toggle('border-yellow-500/30');
             });
         }
+
+        // Horizontal Scroll Logic
+        function enableHorizontalScroll(id) {
+            const container = document.getElementById(id);
+            if (container) {
+                container.addEventListener("wheel", (evt) => {
+                    // Only intercept vertical scrolling if content overflows horizontally
+                    if (container.scrollWidth > container.clientWidth) {
+                        evt.preventDefault();
+                        container.scrollLeft += evt.deltaY;
+                    }
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            enableHorizontalScroll('levels-scroll-container');
+            enableHorizontalScroll('progress-scroll-container');
+        });
     </script>
 </body>
 </html>
