@@ -38,8 +38,9 @@ Route::middleware('guest:web')->group(function () {
 
 
 
-// Client Dashboard
-Route::middleware(['auth', 'verified'])->group(function () {
+// Client Routes (Protected)
+Route::middleware(['auth', 'verified', 'throttle:client'])->group(function () {
+    // Client Dashboard
     Route::get('/dashboard', function (\Illuminate\Http\Request $request) {
         if ($request->user()->role === 'admin') {
             return redirect()->route('admin.dashboard');
@@ -48,27 +49,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::get('/levels', [LevelController::class, 'index'])->name('levels');
+
+    // Logout
+    Route::post('logout', [ClientLoginController::class, 'destroy'])->name('logout');
+
+    // Protected Game Routes
+    Route::get('/play', [LevelController::class, 'play'])->name('play');
+    Route::post('/play/submit', [QuestionController::class, 'submitAnswer'])->name('play.submit');
 });
 
-Route::post('logout', [ClientLoginController::class, 'destroy'])
-    ->middleware('auth')
-    ->name('logout');
-
-// Protected Game Route
-Route::get('/play', [LevelController::class, 'play'])
-    ->middleware(['auth'])
-    ->name('play');
-
-Route::post('/play/submit', [QuestionController::class, 'submitAnswer'])
-    ->middleware(['auth'])
-    ->name('play.submit');
-
-// Debug route removed for security (CSRF risk)
-// Route::get('/play/reset-answer/{questionId}', ...)
-
-Route::get('/debug/questions', function () {
-    return \App\Models\Question::all();
-});
 
 // Admin Auth Routes
 Route::prefix('admin')->group(function () {

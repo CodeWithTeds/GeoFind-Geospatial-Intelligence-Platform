@@ -43,5 +43,9 @@ class AppServiceProvider extends ServiceProvider
             // 5 attempts per 15 minutes
             return Limit::perMinutes(15, 5)->by($request->ip());
         });
+
+        RateLimiter::for('client', function (Request $request) {
+            return Limit::perMinute(120)->by($request->user()?->id ?: $request->ip());
+        });
     }
 }

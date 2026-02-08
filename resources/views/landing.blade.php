@@ -8,9 +8,6 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
     <!-- CesiumJS -->
     <script src="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Cesium.js"></script>
     <link href="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
@@ -28,7 +25,7 @@
     </div>
 
     <!-- Background Image -->
-    <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 z-0 finisher-header">
         <img src="{{ asset('images/findjerks_opt.jpg') }}?v={{ filemtime(public_path('images/findjerks_opt.jpg')) }}" alt="Background" class="w-full h-full object-cover" fetchpriority="high">
         <!-- Dark gradient overlay for better text readability if needed -->
         <div class="absolute inset-0 bg-black/10"></div>
