@@ -24,4 +24,14 @@ class Question extends Model
         'answer_longitude' => 'float',
         'tolerance_meters' => 'integer',
     ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'answer_latitude',
+        'answer_longitude',
+    ];
 }

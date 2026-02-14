@@ -56,6 +56,9 @@ Route::middleware(['auth', 'verified', 'throttle:client'])->group(function () {
     // Protected Game Routes
     Route::get('/play', [LevelController::class, 'play'])->name('play');
     Route::post('/play/submit', [QuestionController::class, 'submitAnswer'])->name('play.submit');
+    
+    // Leaderboard
+    Route::get('/leaderboard', \App\Livewire\Leaderboard::class)->name('leaderboard');
 });
 
 

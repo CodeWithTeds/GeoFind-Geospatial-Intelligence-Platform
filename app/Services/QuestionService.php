@@ -14,10 +14,15 @@ use Illuminate\Support\Facades\DB;
 class QuestionService
 {
     protected $repository;
+    protected $scoreService;
 
     public function __construct(QuestionRepositoryInterface $repository)
     {
         $this->repository = $repository;
+        // Manual instantiation or property injection to avoid circular deps if any, 
+        // though Service Container is preferred.
+        // We'll use the ScoreService dynamically or instantiate it.
+        $this->scoreService = new \App\Services\ScoreService(new \App\Services\Leaderboard\Strategies\TotalScoreStrategy());
     }
 
     public function submitAnswer(User $user, int $questionId, float $lat, float $lng): array
@@ -95,6 +100,9 @@ class QuestionService
             if ($question->level == $user->completed_levels + 1) {
                 $user->increment('completed_levels');
             }
+            
+            // Notify Leaderboard
+            $this->scoreService->notifyScoreUpdate();
         }
 
         return $this->formatResult($answer, $question, false, $distanceMeters);

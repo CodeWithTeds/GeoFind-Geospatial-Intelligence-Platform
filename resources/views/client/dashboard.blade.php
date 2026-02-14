@@ -57,6 +57,8 @@
             <h2 class="text-sm md:text-base font-bold uppercase tracking-widest text-yellow-500 mt-2 mb-4 transform -skew-x-6 drop-shadow-lg">
                 Geospatial Intelligence Platform
             </h2>
+
+            <!-- Quick Action Buttons -->
         </div>
     </main>
 

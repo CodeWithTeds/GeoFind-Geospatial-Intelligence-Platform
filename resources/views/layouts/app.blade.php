@@ -30,18 +30,28 @@
 </head>
 
 <body class="bg-dark text-light">
-    <div class="container py-4">
-        <h1 class="text-light mb-4 border-bottom pb-3">@yield('header', 'Location Tracker')</h1>
+    <!-- Navbar should only be included if not already included by the view, but since Leaderboard view includes it explicitly, we can make it conditional or just let views handle it. 
+         However, the issue is that Leaderboard view extends 'layouts.app' but also @includes 'client.partials.nav'.
+         AND 'layouts.app' has a .container that constrains width.
+    -->
+    
+    <!-- We will make the container full width if it's the leaderboard page, or just modify the layout structure -->
+    @if(request()->routeIs('leaderboard'))
+         @yield('content')
+    @else
+        <div class="container py-4">
+            <h1 class="text-light mb-4 border-bottom pb-3">@yield('header', 'Location Tracker')</h1>
 
-        @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
 
-        @yield('content')
-    </div>
+            @yield('content')
+        </div>
+    @endif
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/services/MapService.js') }}"></script>

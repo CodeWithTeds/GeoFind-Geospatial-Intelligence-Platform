@@ -47,4 +47,9 @@ class User extends Authenticatable
             'completed_levels' => 'integer',
         ];
     }
+
+    public function answers()
+    {
+        return $this->hasMany(UserAnswer::class);
+    }
 }
