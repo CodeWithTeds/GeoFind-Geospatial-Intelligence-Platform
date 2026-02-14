@@ -65,11 +65,16 @@
             @if($top3->has(0))
             <div class="flex flex-col items-center group w-1/3 md:w-auto z-10">
                 <div class="relative mb-4 transition-transform duration-300 group-hover:-translate-y-3">
-                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
-                        <span class="text-4xl filter drop-shadow-[0_0_10px_rgba(234,179,8,0.8)]"></span>
+                    <!-- Tabingi 3D Text - ABOVE the image -->
+                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 z-30 -rotate-6 whitespace-nowrap">
+                         <span class="text-xl md:text-2xl font-black text-yellow-400 drop-shadow-[0_3px_3px_rgba(0,0,0,0.5)] tracking-widest"
+                               style="-webkit-text-stroke: 0.8px #713f12; text-shadow: 1.5px 1.5px 0 #000, -0.5px -0.5px 0 #713f12;">
+                            THE G.O.A.T
+                        </span>
                     </div>
+
                     <div class="w-20 h-20 md:w-32 md:h-32 rounded-full border-4 border-yellow-400 overflow-hidden bg-yellow-900 shadow-[0_0_30px_rgba(234,179,8,0.5)]">
-                        <img src="{{ asset('images/p1.png') }}" alt="Rank 1" class="w-full h-full object-cover">
+                        <img src="{{ asset('images/oxbit.png') }}" alt="Rank 1" class="w-full h-full object-cover">
                     </div>
                     <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-yellow-600 text-white text-xs px-3 py-1 rounded-full border border-yellow-400 font-bold whitespace-nowrap shadow-lg">
                         {{ $top3[0]->name }}
