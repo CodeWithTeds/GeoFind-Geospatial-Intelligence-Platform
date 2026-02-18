@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Log;
 
 class LocationController extends Controller
 {
-    
-
     public function __construct(protected LocationService $locationService)
     { 
     }                        

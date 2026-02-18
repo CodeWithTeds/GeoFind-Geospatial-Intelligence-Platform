@@ -25,7 +25,6 @@ class RegisterController extends Controller implements HasMiddleware
         return [
             'guest',
             new Middleware(IpControlMiddleware::class),
-            // Throttling registration is crucial to prevent mass account creation
             new Middleware('throttle:register', only: ['store']), 
         ];
     }

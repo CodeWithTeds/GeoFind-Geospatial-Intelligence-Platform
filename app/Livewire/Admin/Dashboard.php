@@ -6,6 +6,8 @@ use App\Services\QuestionService;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Spatie\Analytics\Facades\Analytics;
+use Spatie\Analytics\Period;
 
 #[Lazy]
 #[Layout('layouts.admin')]
@@ -15,8 +17,18 @@ class Dashboard extends Component
     {
         $stats = $service->getDashboardStats();
         
+        $analyticsData = null;
+        try {
+            // Fetch visitors and page views for the last 7 days
+            $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
+        } catch (\Exception $e) {
+            // Log the error for debugging
+            \Illuminate\Support\Facades\Log::error('Analytics error: ' . $e->getMessage());
+        }
+
         return view('livewire.admin.dashboard', [
-            'stats' => $stats
+            'stats' => $stats,
+            'analyticsData' => $analyticsData
         ]);
     }
 

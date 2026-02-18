@@ -10,8 +10,6 @@ use Illuminate\Http\JsonResponse;
 
 class QuestionController extends Controller
 {
-    
-
     public function __construct(protected QuestionService $service)
     {
     }

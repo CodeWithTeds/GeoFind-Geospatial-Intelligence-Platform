@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Traits;
+
 use App\Services\GeometricService;
 use App\Models\Location;
 
 trait HasGeometricCalculations
 {
-  
-      
+
+
     /**
      * Calculate distance to another location using Haversine formula
      */
@@ -29,9 +30,9 @@ trait HasGeometricCalculations
      */
     public function triangleAreaWith(Location $point2, Location $point3): float
     {
-       return app(GeometricService::class)->calculateTriangleArea($this, $point2, $point3);
+        return app(GeometricService::class)->calculateTriangleArea($this, $point2, $point3);
     }
-    
+
     /**
      * Find points within a given radius
      */
@@ -47,6 +48,4 @@ trait HasGeometricCalculations
     {
         return app(GeometricService::class)->calculateBearing($this, $other);
     }
-
-
 }
