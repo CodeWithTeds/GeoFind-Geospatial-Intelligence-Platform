@@ -1,6 +1,6 @@
-<div class="accordion-item bg-dark text-light border-secondary mb-3">
+<div class="accordion-item bg-white text-dark border-secondary mb-3">
     <h2 class="accordion-header">
-        <button class="accordion-button bg-secondary text-white collapsed" type="button" data-bs-toggle="collapse"
+        <button class="accordion-button bg-light text-dark collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#geocodingCollapse" aria-expanded="false" aria-controls="geocodingCollapse">
             <i class="fas fa-map-marked-alt me-2"></i>Reverse Geocoding
         </button>
@@ -11,7 +11,7 @@
                 @csrf
                 <div class="mb-3">
                     <label for="location_id" class="form-label">Select Location</label>
-                    <select name="location_id" id="location_id" class="form-select bg-dark text-light border-secondary" required>
+                    <select name="location_id" id="location_id" class="form-select bg-white text-dark border-secondary" required>
                         @foreach ($locations as $location)
                             <option value="{{ $location->id }}">{{ $location->name }}
                                 ({{ $location->latitude }}, {{ $location->longitude }})

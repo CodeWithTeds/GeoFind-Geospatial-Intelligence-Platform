@@ -1,6 +1,6 @@
-<div class="accordion-item bg-dark text-light border-secondary mb-3">
+<div class="accordion-item bg-white text-dark border-secondary mb-3">
     <h2 class="accordion-header">
-        <button class="accordion-button bg-secondary text-white collapsed" type="button" data-bs-toggle="collapse"
+        <button class="accordion-button bg-light text-dark collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#geohashCollapse" aria-expanded="false" aria-controls="geohashCollapse">
             <i class="fas fa-hashtag me-2"></i>Convert to Geohash
         </button>
@@ -12,13 +12,13 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="latitude" class="form-label">Latitude</label>
-                        <input type="number" step="any" class="form-control bg-dark text-light border-secondary" 
+                        <input type="number" step="any" class="form-control bg-white text-dark border-secondary" 
                             id="latitude" name="latitude" required min="-90" max="90"
                             placeholder="Enter latitude (-90 to 90)">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="longitude" class="form-label">Longitude</label>
-                        <input type="number" step="any" class="form-control bg-dark text-light border-secondary" 
+                        <input type="number" step="any" class="form-control bg-white text-dark border-secondary" 
                             id="longitude" name="longitude" required min="-180" max="180"
                             placeholder="Enter longitude (-180 to 180)">
                     </div>

@@ -1,6 +1,6 @@
-<div class="accordion-item bg-dark text-light border-secondary mb-3">
+<div class="accordion-item bg-white text-dark border-secondary mb-3">
     <h2 class="accordion-header">
-        <button class="accordion-button bg-secondary text-white collapsed" type="button" data-bs-toggle="collapse"
+        <button class="accordion-button bg-light text-dark collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#midpointCollapse" aria-expanded="false" aria-controls="midpointCollapse">
             <i class="fas fa-dot-circle me-2"></i>Calculate Midpoint
         </button>
@@ -11,7 +11,7 @@
                 @csrf
                 <div class="mb-3">
                     <label class="form-label">Point 1</label>
-                    <select class="form-select bg-dark text-light border-secondary" name="point1_id" required>
+                    <select class="form-select bg-white text-dark border-secondary" name="point1_id" required>
                         @foreach ($locations as $location)
                             <option value="{{ $location->id }}"> {{ $location->name }}</option>
                         @endforeach
@@ -20,7 +20,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Point 2</label>
-                    <select class="form-select bg-dark text-light border-secondary" name="point2_id" required>
+                    <select class="form-select bg-white text-dark border-secondary" name="point2_id" required>
                         @foreach ($locations as $location)
                             <option value="{{ $location->id }}"> {{ $location->name }}</option>
                         @endforeach

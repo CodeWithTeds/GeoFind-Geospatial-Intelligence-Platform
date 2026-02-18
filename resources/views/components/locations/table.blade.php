@@ -1,11 +1,11 @@
-<div class="card bg-dark border-secondary mb-4">
-    <div class="card-header bg-secondary text-white">
+<div class="card bg-white border-secondary mb-4">
+    <div class="card-header bg-light text-dark">
         <i class="fas fa-map-marker-alt me-2"></i>Locations
     </div>
     <div class="card-body p-0">
         <div class="table-responsive">
-            <table class="table table-dark table-hover align-middle mb-0">
-                <thead class="table-secondary text-dark">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light text-dark">
                     <tr>
                         <th>Name</th>
                         <th>Latitude</th>

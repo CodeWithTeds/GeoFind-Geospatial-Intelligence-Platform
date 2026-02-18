@@ -7,7 +7,6 @@
 @endsection
 
 @section('styles')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
     <link href="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
@@ -33,7 +32,7 @@
         </div>
 
         <div class="col-lg-6">
-            <h2 class="text-light mb-4">Location Calculations</h2>
+            <h2 class="text-dark mb-4">Location Calculations</h2>
 
             <div class="accordion" id="calculationsAccordion">
                 @include('components.locations.geohash-converter')
@@ -53,10 +52,8 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script src="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Cesium.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
     <script src="{{ asset('js/services/MapService.js') }}"></script>
     <script src="{{ asset('js/location.js') }}"></script>

@@ -1,6 +1,6 @@
-<div class="accordion-item bg-dark text-light border-secondary mb-3">
+<div class="accordion-item bg-white text-dark border-secondary mb-3">
     <h2 class="accordion-header">
-        <button class="accordion-button bg-secondary text-white collapsed" type="button" data-bs-toggle="collapse"
+        <button class="accordion-button bg-light text-dark collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#triangleCollapse" aria-expanded="false" aria-controls="triangleCollapse">
             <i class="fas fa-draw-polygon me-2"></i>Calculate Triangle Area
         </button>
@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label class="form-label">Point 1</label>
-                        <select class="form-select bg-dark text-light border-secondary" name="point1_id" required>
+                        <select class="form-select bg-white text-dark border-secondary" name="point1_id" required>
                             @foreach ($locations as $location)
                                 <option value="{{ $location->id }}"> {{ $location->name }}</option>
                             @endforeach
@@ -21,7 +21,7 @@
 
                     <div class="col-md-4 mb-3">
                         <label class="form-label">Point 2</label>
-                        <select class="form-select bg-dark text-light border-secondary" name="point2_id" required>
+                        <select class="form-select bg-white text-dark border-secondary" name="point2_id" required>
                             @foreach ($locations as $location)
                                 <option value="{{ $location->id }}"> {{ $location->name }}</option>
                             @endforeach
@@ -30,7 +30,7 @@
 
                     <div class="col-md-4 mb-3">
                         <label class="form-label">Point 3</label>
-                        <select class="form-select bg-dark text-light border-secondary" name="point3_id" required>
+                        <select class="form-select bg-white text-dark border-secondary" name="point3_id" required>
                             @foreach ($locations as $location)
                                 <option value="{{ $location->id }}"> {{ $location->name }}</option>
                             @endforeach
