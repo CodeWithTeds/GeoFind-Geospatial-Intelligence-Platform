@@ -18,12 +18,22 @@
             font-family: 'Chakra Petch', sans-serif;
             background-color: #000000;
         }
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
+        /* Custom Scrollbar for Levels Container Only */
+        #levels-scroll-container::-webkit-scrollbar {
+            width: 8px;
+            height: 6px;
         }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        #levels-scroll-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05); 
+            border-radius: 10px;
+            margin: 0px 16px;
+        }
+        #levels-scroll-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, #f59e0b, #d97706); 
+            border-radius: 10px;
+        }
+        #levels-scroll-container::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(90deg, #fbbf24, #b45309); 
         }
     </style>
 </head>
@@ -83,7 +93,7 @@
                 Mission Selection
             </h1>
 
-            <div id="levels-scroll-container" class="flex-1 w-full overflow-x-auto overflow-y-visible md:overflow-y-hidden scrollbar-hide p-4 pt-16 pb-8">
+            <div id="levels-scroll-container" class="flex-1 w-full overflow-x-auto overflow-y-visible md:overflow-y-hidden p-4 pt-16 pb-3">
                 <div class="flex flex-nowrap gap-6 md:gap-8 px-4 min-w-max">
                     @forelse($levels as $level)
                         <!-- Hanging Level Card -->

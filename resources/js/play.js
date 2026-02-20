@@ -9,7 +9,7 @@ import { ReviewMapService } from './services/ReviewMapService';
 // Static Configuration / Data
 const CONFIG = {
     hotels: [
-        { name: "Prof Alex The GOAT", lat: 14.5960, lon: 120.9720 },
+       
     ],
     camera: {
         longitude: 120.9842,
@@ -297,7 +297,7 @@ function initializeMap() {
     // Initialize Cesium Viewer with default widgets enabled
     const viewer = new Cesium.Viewer('cesiumContainer', {
         terrain: Cesium.Terrain.fromWorldTerrain(),
-        // Explicitly use Bing Maps Aerial (Asset ID 2) via our Proxy
+        // Use Aerial (Asset 2) as base layer
         imageryProvider: new Cesium.IonImageryProvider({ assetId: 2 }),
         baseLayerPicker: true,
         geocoder: true,
@@ -306,6 +306,18 @@ function initializeMap() {
         selectionIndicator: false,
         infoBox: false
     });
+
+    // Add Labels Overlay (CartoDB Dark Matter Labels - Tinted Gold)
+    const labelsLayer = viewer.imageryLayers.addImageryProvider(
+        new Cesium.UrlTemplateImageryProvider({
+            url: 'https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}.png',
+            subdomains: ['a', 'b', 'c', 'd'],
+            credit: 'Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
+        })
+    );
+
+    labelsLayer.brightness = 2.0; // Boost brightness to turn gray pixels to white before tinting
+    labelsLayer.contrast = 1.5;   // Increase contrast for sharper text
 
     // Load 3D Tiles
     try {
@@ -358,7 +370,7 @@ function initializeMap() {
                 position: cartesian,
                 point: {
                     pixelSize: 10,
-                    color: Cesium.Color.YELLOW,
+                    color: Cesium.Color.GOLD,
                     outlineColor: Cesium.Color.BLACK,
                     outlineWidth: 2,
                     heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
@@ -383,8 +395,8 @@ function addHotelsToMap(viewer, hotels) {
             position: Cesium.Cartesian3.fromDegrees(hotel.lon, hotel.lat),
             point: {
                 pixelSize: 10,
-                color: Cesium.Color.RED,
-                outlineColor: Cesium.Color.WHITE,
+                color: Cesium.Color.GOLD,
+                outlineColor: Cesium.Color.BLACK,
                 outlineWidth: 2,
                 heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
             },

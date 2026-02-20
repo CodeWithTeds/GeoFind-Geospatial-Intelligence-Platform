@@ -26,7 +26,7 @@
 
     <!-- Background Image -->
     <div class="absolute inset-0 z-0 finisher-header">
-        <img src="{{ asset('images/findjerks_opt.jpg') }}?v={{ filemtime(public_path('images/findjerks_opt.jpg')) }}" alt="Background" class="w-full h-full object-cover" fetchpriority="high">
+        <img src="{{ asset('images/findjerks_opt.avif') }}?v={{ filemtime(public_path('images/findjerks_opt.avif')) }}" alt="Background" class="w-full h-full object-cover" fetchpriority="high">
         <!-- Dark gradient overlay for better text readability if needed -->
         <div class="absolute inset-0 bg-black/10"></div>
     </div>

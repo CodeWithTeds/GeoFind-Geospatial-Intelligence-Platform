@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="order-2 flex justify-end">
-                    <img src="{{ asset('images/danvs.jpg') }}" class="w-full md:w-3/5 rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.5)]" alt="Analyze The Clue">
+                    <img src="{{ asset('images/danvs.avif') }}" class="w-full md:w-3/5 rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.5)]" alt="Analyze The Clue">
                 </div>
             </section>
 
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="order-2 md:order-1 flex justify-end md:justify-start">
-                    <img src="{{ asset('images/p1.png') }}" class="w-full md:w-3/5 rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.5)]" alt="Search The Map">
+                    <img src="{{ asset('images/p1.avif') }}" class="w-full md:w-3/5 rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.5)]" alt="Search The Map">
                 </div>
             </section>
 
@@ -76,9 +76,9 @@
                     </div>
                 </div>
                 <div class="order-2 flex justify-end">
-                    <img src="{{ asset('images/p2.png') }}" class="w-full md:w-3/5 rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.5)]" alt="Pin To Win">
+                    <img src="{{ asset('images/p2.avif') }}" class="w-full md:w-3/5 rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.5)]" alt="Pin To Win">
                 </div>
-            </section>
+            </section>  
 
             <!-- CTA -->
             <section class="py-16 flex flex-col items-center justify-center text-center">
