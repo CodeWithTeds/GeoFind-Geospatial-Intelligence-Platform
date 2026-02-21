@@ -3,17 +3,17 @@
 namespace App\Services\Computation;
 
 use App\Models\Location;
-use League\Geotools\Coordinate\Coordinate;
-use League\Geotools\Coordinate\Ellipsoid;
-use League\Geotools\Geotools;
-use League\Geotools\CLI\Command\Distance\Haversine;
-use League\Geotools\Convert\Convert;
+// use League\Geotools\Coordinate\Coordinate;
+// use League\Geotools\Coordinate\Ellipsoid;
+// use League\Geotools\Geotools;
+// use League\Geotools\CLI\Command\Distance\Haversine;
+// use League\Geotools\Convert\Convert;
 use App\Utils\response;
 use Faker\Core\Coordinates;
 use Geocoder\Collection;
 use Throwable;
 use Illuminate\Support\Facades\Log;
-use League\Geotools\Polygon\Polygon;
+// use League\Geotools\Polygon\Polygon;
 
 use function Laravel\Prompts\error;
 
@@ -25,35 +25,36 @@ class GeoToolsFeatures
     /**
      * @var Geotools|null The Geotools instance.
      */
-    private static ?Geotools $geotools = null;
+    // private static ?Geotools $geotools = null;
 
     /**
      * @return Geotools
      */
 
 
-    private static function getGeotools(): Geotools
-    {
-        if (!isset(self::$geotools)) {
-            self::$geotools = new Geotools();
-        }
+    // private static function getGeotools(): Geotools
+    // {
+    //     if (!isset(self::$geotools)) {
+    //         self::$geotools = new Geotools();
+    //     }
 
-        return self::$geotools;
-    }
+    //     return self::$geotools;
+    // }
 
 
 
     public function distance($from, $to)
     {
-        if (!$from instanceof Coordinate) {
-            $from = $this->coordinate($from);
-        }
+        // if (!$from instanceof Coordinate) {
+        //     $from = $this->coordinate($from);
+        // }
 
-        if (!$to instanceof Coordinate) {
-            $to = $this->coordinate($to);
-        }
+        // if (!$to instanceof Coordinate) {
+        //     $to = $this->coordinate($to);
+        // }
 
-        return $this->geotools->distance()->setFrom($from)->setTo($to);
+        // return $this->geotools->distance()->setFrom($from)->setTo($to);
+        return 0;
     }
 
 
@@ -69,32 +70,34 @@ class GeoToolsFeatures
 
     public function bearing($from, $to)
     {
-        if (!$from instanceof Coordinate) {
-            $from = $this->coordinate($from);
-        }
+        // if (!$from instanceof Coordinate) {
+        //     $from = $this->coordinate($from);
+        // }
 
-        if (!$to instanceof Coordinate) {
-            $to = $this->coordinate($to);
-        }
+        // if (!$to instanceof Coordinate) {
+        //     $to = $this->coordinate($to);
+        // }
 
-        return $this->geotools->distance()->setFrom($from)->setTo($to);
+        // return $this->geotools->distance()->setFrom($from)->setTo($to);
+        return 0;
     }
 
 
     public function vertex($from)
     {
-        if (!$from instanceof Coordinate) {
-            $from = $this->coordinate($from);
-        }
+        // if (!$from instanceof Coordinate) {
+        //     $from = $this->coordinate($from);
+        // }
 
-        return $this->geotools->vertex()->setFrom($from);
+        // return $this->geotools->vertex()->setFrom($from);
+        return null;
     }
 
 
     public function calculateGreatCirclePath(float $lat1, float $lat2, float $lon1, float $lon2): array
     {
-        $from = new Coordinate([$lat1, $lon1]);
-        $to = new Coordinate([$lat2, $lon2]);
+        // $from = new Coordinate([$lat1, $lon1]);
+        // $to = new Coordinate([$lat2, $lon2]);
         
         // TODO: Implement calculation
         return [];
@@ -104,15 +107,16 @@ class GeoToolsFeatures
 
     public function isPointInPolygon(float $latitude, float $longitude, array $vertices): bool
     {
-        $polygon = new Polygon();
+        // $polygon = new Polygon();
 
-        foreach ($vertices as $vertex) {
-            $polygon->add(new Coordinate([$vertex[0], $vertex[1]]));
-        }
+        // foreach ($vertices as $vertex) {
+        //     $polygon->add(new Coordinate([$vertex[0], $vertex[1]]));
+        // }
 
-        $point = new Coordinate([$latitude, $longitude]);
+        // $point = new Coordinate([$latitude, $longitude]);
 
-        return $polygon->pointInPolygon($point);
+        // return $polygon->pointInPolygon($point);
+        return false;
     }
 
 
@@ -155,17 +159,18 @@ class GeoToolsFeatures
     //     }
 
 
-    public function coordinate($coordinates): Coordinate
+    public function coordinate($coordinates) // : Coordinate
     {
-        if (!$coordinates instanceof Coordinate) {
-            return $coordinates;
-        }
+        // if (!$coordinates instanceof Coordinate) {
+        //     return $coordinates;
+        // }
 
-        if ($coordinates instanceof Location) {
-            return new Coordinate([$coordinates->latitude, $coordinates->longitude]);
-        }
+        // if ($coordinates instanceof Location) {
+        //     return new Coordinate([$coordinates->latitude, $coordinates->longitude]);
+        // }
 
-        return new Coordinate($coordinates);
+        // return new Coordinate($coordinates);
+        return null;
     }
 
 
@@ -181,9 +186,9 @@ class GeoToolsFeatures
 
     public function convert($coordinates)
     {
-        if (!$coordinates instanceof Coordinate) {
-            $coordinates = $this->coordinate($coordinates);
-        }
+        // if (!$coordinates instanceof Coordinate) {
+        //     $coordinates = $this->coordinate($coordinates);
+        // }
     }
 
 
@@ -215,7 +220,8 @@ class GeoToolsFeatures
 
     public function geohash()
     {
-        return $this->geotools->geohash();
+        // return $this->geotools->geohash();
+        return null;
     }
 
     // public function convertDegreesMinutesSeconds(float $latitude, float $longitude, ?string $format = null): array
