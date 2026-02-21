@@ -56,7 +56,6 @@ class CesiumProxyController extends Controller
             }
 
             return response()->json($response->json());
-
         } catch (\Exception $e) {
             Log::error("Cesium Proxy Exception", [
                 'message' => $e->getMessage(),
@@ -131,7 +130,6 @@ class CesiumProxyController extends Controller
             }
 
             return response()->json($response->json());
-
         } catch (\Exception $e) {
             Log::error("Cesium Geocode Proxy Exception", [
                 'message' => $e->getMessage(),
