@@ -66,10 +66,15 @@
             </div>
             <div class="ml-3">
                 <p class="text-sm text-yellow-700">
-                    Google Analytics data is currently unavailable. Please ensure the service account credentials file is uploaded to:
+                    Google Analytics data is currently unavailable. Please ensure the <strong>GOOGLE_ANALYTICS_CREDENTIALS</strong> environment variable is set correctly in production, or the service account credentials file is uploaded to:
                     <br>
                     <code class="bg-yellow-100 px-1 py-0.5 rounded text-xs font-mono mt-1 block w-fit">storage/app/analytics/service-account-credentials.json</code>
                 </p>
+                @if($analyticsError)
+                    <div class="mt-2 pt-2 border-t border-yellow-200">
+                        <p class="text-xs text-yellow-800 font-mono break-all">Error: {{ $analyticsError }}</p>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

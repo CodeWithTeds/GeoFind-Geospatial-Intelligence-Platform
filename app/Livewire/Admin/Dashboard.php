@@ -13,6 +13,8 @@ use Spatie\Analytics\Period;
 #[Layout('layouts.admin')]
 class Dashboard extends Component
 {
+    public $analyticsError = null;
+
     public function render(QuestionService $service)
     {
         $stats = $service->getDashboardStats();
@@ -24,6 +26,7 @@ class Dashboard extends Component
         } catch (\Exception $e) {
             // Log the error for debugging
             \Illuminate\Support\Facades\Log::error('Analytics error: ' . $e->getMessage());
+            $this->analyticsError = $e->getMessage();
         }
 
         return view('livewire.admin.dashboard', [
