@@ -11,7 +11,9 @@ composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # 1.5 Install NPM Dependencies and Build Assets
 echo "🎨 Building frontend assets..."
-npm install
+# Unset NPM_CONFIG_PRODUCTION to avoid "config production" warning and ensure devDependencies are installed
+unset NPM_CONFIG_PRODUCTION
+npm ci
 npm run build
 
 # 2. Run Database Migrations
