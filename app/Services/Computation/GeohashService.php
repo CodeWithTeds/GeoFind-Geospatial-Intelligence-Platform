@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils;
+namespace App\Services\Computation;
 
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -238,7 +238,7 @@ class GeohashService
         ];
 
         // Kuhaon naton ang katapusan nga letra sang geohash
-        $lastCh = $geohash(strlen($geohash) - 1);
+        $lastCh = $geohash[strlen($geohash) - 1];
 
         // Kuhaon naton kung even (0) ukon odd (1) ang kadalumon sang geohash
         $type = strlen($geohash) % 2;

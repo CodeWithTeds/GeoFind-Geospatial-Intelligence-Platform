@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils;
+namespace App\Services\Computation;
 
 use App\Models\Location;
 use League\Geotools\Coordinate\Coordinate;
@@ -95,6 +95,9 @@ class GeoToolsFeatures
     {
         $from = new Coordinate([$lat1, $lon1]);
         $to = new Coordinate([$lat2, $lon2]);
+        
+        // TODO: Implement calculation
+        return [];
     }
 
 
