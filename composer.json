@@ -44,6 +44,19 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
+        "start": [
+            "@php artisan serve --host=0.0.0.0 --port=${PORT:-8000}"
+        ],
+        "migrate": [
+            "@php artisan migrate --force"
+        ],
+        "seed": [
+            "@php artisan db:seed --force"
+        ],
+        "optimize-app": [
+            "@php artisan optimize:clear",
+            "@php artisan optimize"
+        ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
