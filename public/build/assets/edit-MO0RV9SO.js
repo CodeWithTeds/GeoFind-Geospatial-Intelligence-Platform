@@ -1,0 +1,1 @@
+import{i}from"./admin-map-picker-D-3fH8ut.js";const t=()=>{Alpine.data("questionMap",t=>({init(){i({containerId:this.$el.id,initialLat:t.initialLat,initialLng:t.initialLng,tilesetId:t.tilesetId,onLocationPicked:(i,t)=>{this.$wire.set("answer_latitude",i),this.$wire.set("answer_longitude",t)}})}}))};window.Alpine&&t(),document.addEventListener("alpine:init",t);
