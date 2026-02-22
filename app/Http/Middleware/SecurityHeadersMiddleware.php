@@ -23,7 +23,7 @@ class SecurityHeadersMiddleware
         // Allows fonts from self, Google Fonts, and Cloudflare
         $cspScriptSrc = "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://challenges.cloudflare.com https://*.cloudflare.com https://unpkg.com https://cesium.com https://dev.virtualearth.net https://*.virtualearth.net blob:";
         $cspStyleSrc = "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com https://cesium.com";
-        $cspConnectSrc = "connect-src 'self' https://challenges.cloudflare.com https://*.cloudflare.com https://api.mapbox.com https://events.mapbox.com https://*.cesium.com https://cesium.com https://dev.virtualearth.net https://*.virtualearth.net blob: data:";
+        $cspConnectSrc = "connect-src 'self' https://challenges.cloudflare.com https://*.cloudflare.com https://api.mapbox.com https://events.mapbox.com https://*.cesium.com https://cesium.com https://dev.virtualearth.net https://*.virtualearth.net https://*.cartocdn.com https://*.basemaps.cartocdn.com https://services.arcgisonline.com https://server.arcgisonline.com blob: data:";
 
         // In local development, allow Vite's hot module replacement and dev server
         if (app()->isLocal()) {
@@ -36,7 +36,7 @@ class SecurityHeadersMiddleware
         $csp = "default-src 'self'; " .
             $cspScriptSrc . "; " .
             $cspStyleSrc . "; " .
-            "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; " .
+            "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://fonts.googleapis.com data:; " .
             "img-src 'self' data: https://* blob:; " . // Blob needed for Cesium/Maps
             $cspConnectSrc . "; " .
             "frame-src 'self' https://challenges.cloudflare.com https://*.cloudflare.com; " .
