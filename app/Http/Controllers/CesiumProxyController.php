@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 class CesiumProxyController extends Controller
 {
-    /**
+    /** df
      * Proxy request to Cesium Ion Asset Endpoint.
      *
      * @param Request $request

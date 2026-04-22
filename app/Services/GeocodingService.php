@@ -141,12 +141,29 @@ class GeocodingService
             $poiQuery = $this->buildPoiQuery($location);
 
             $poiResponse = Http::get('http://overpass-api.de/api/interpreter', [
-                'data' => "[out:json];node(around:1000,{$location->latitude},{$location->longitude})[tourism];out;"
+                'data' => $poiQuery,
             ]);
 
+            if ($poiResponse->failed()) {
+                throw new Exception('Failed to fetch points of interest: ' . $poiResponse->status());
+            }
+
             $poiData = $poiResponse->json();
+            if (!is_array($poiData)) {
+                Log::warning('Overpass API returned an empty or invalid JSON payload', [
+                    'status' => $poiResponse->status(),
+                    'body' => $poiResponse->body(),
+                    'location' => [
+                        'latitude' => $location->latitude,
+                        'longitude' => $location->longitude,
+                    ],
+                ]);
+
+                return [];
+            }
+
             return $this->processPoiData($poiData, $location);
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             Log::warning('Error fetching PoI', [
                 'error' => $e->getMessage(),
                 'location' => [
@@ -160,30 +177,39 @@ class GeocodingService
 
     private function processPoiData(array $poiData, Location $location): array
     {
-        $pois = array_map(function ($node) use ($location) {
+        if (!isset($poiData['elements']) || !is_array($poiData['elements'])) {
+            return [];
+        }
+
+        $pois = array_values(array_filter(array_map(function ($node) use ($location) {
+            if (!is_array($node) || !isset($node['lat'], $node['lon'])) {
+                return null;
+            }
 
             $poiLocation = new Location([
                 'latitude' => $node['lat'],
-                'longtitude' => $node['lon']
+                'longitude' => $node['lon']
             ]);
+
+            $distance = $this->geometricService->calculateDistance(
+                $poiLocation,
+                $location
+            );
 
             return [
                 'name' => $node['tags']['name'] ?? 'Unknown',
-                'type' => $this->getPoiType($node['tags']),
-                'category' => $this->getPoiCategorys($node['tags']),
+                'type' => $this->getPoiType($node['tags'] ?? []),
+                'category' => $this->getPoiCategories($node['tags'] ?? []),
                 'coordinates' => [$node['lat'], $node['lon']],
-                'distance' => $this->geometricService->calculateDistance(
-                    $poiLocation,
-                    $location
-                ),
+                'distance' => $distance['distance'],
                 'address' => $node['tags']['addr:full'] ?? null,
-                'decription' => $node['tags']['description'] ?? null,
+                'description' => $node['tags']['description'] ?? null,
                 'tags' => $node['tags'] ?? []
             ];
-        }, $poiData['elements']);
+        }, $poiData['elements'])));
 
         usort($pois, function ($a, $b) {
-            return $a['distance'] <=> $b['distance'];
+            return ($a['distance']['kilometers'] ?? INF) <=> ($b['distance']['kilometers'] ?? INF);
         });
 
         return $pois;
@@ -191,10 +217,10 @@ class GeocodingService
 
 
 
-    private function getPoiCategorys(array $tags): string
+    private function getPoiCategories(array $tags): string
     {
         foreach (self::POI_CATEGORIES as $key => $category) {
-            if (isset($tag[$key])) {
+            if (isset($tags[$key])) {
                 return $category;
             }
         }
@@ -205,8 +231,8 @@ class GeocodingService
     private function getPoiType(array $tags): string
     {
         foreach (self::POI_CATEGORIES as $key => $category) {
-            if (isset($tag[$key])) {
-                return $category;
+            if (isset($tags[$key])) {
+                return (string) $tags[$key];
             }
         }
 
