@@ -1,61 +1,66 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    <img src="https://raw.githubusercontent.com/CesiumGS/cesium/main/Apps/Sandcastle/images/Cesium_Logo_Color.jpg" width="180" alt="GeoFind Logo">
 </p>
 
-## About Laravel
+<h1 align="center">GeoFind</h1>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+Interactive Geospatial Web Game powered by 3D Globe Visualization
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<p align="center">
+<a href="#"><img src="https://img.shields.io/badge/Laravel-v12-red" alt="Laravel"></a>
+<a href="#"><img src="https://img.shields.io/badge/Vue.js-v3-42b883" alt="Vue"></a>
+<a href="#"><img src="https://img.shields.io/badge/CesiumJS-3D%20Globe-blue" alt="CesiumJS"></a>
+<a href="#"><img src="https://img.shields.io/badge/Leaflet-Mapping-brightgreen" alt="Leaflet"></a>
+<a href="#"><img src="https://img.shields.io/badge/TailwindCSS-ModernUI-38bdf8" alt="Tailwind"></a>
+<a href="#"><img src="https://img.shields.io/badge/License-MIT-yellow" alt="License"></a>
+</p>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## About GeoFind
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+GeoFind is an interactive geospatial web game where users explore, guess, and pin locations across the Philippines using an immersive 3D globe experience.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Built with modern geospatial technologies such as :contentReference[oaicite:0]{index=0} and :contentReference[oaicite:1]{index=1}, the platform delivers high-fidelity terrain rendering, real-time mapping, and spatial interaction features.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+The project combines geospatial intelligence, gaming, and modern web technologies into a responsive and scalable application.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Features
 
-### Premium Partners
+- Interactive 3D Globe Navigation
+- Real-Time Terrain Visualization
+- Location Guessing & Pinning System
+- Philippine Map Exploration
+- Reverse Geocoding Integration
+- Radius & Proximity Detection
+- Responsive Modern UI
+- Dark Mode Interface
+- High-Performance Map Rendering
+- Geospatial Data Visualization
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## Tech Stack
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Frontend
+- Vue.js
+- TypeScript
+- Tailwind CSS
+- Vite
 
-## Code of Conduct
+### Backend
+- Laravel
+- RESTful APIs
+- MySQL
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Geospatial Technologies
+- :contentReference[oaicite:2]{index=2}
+- :contentReference[oaicite:3]{index=3}
+- OpenStreetMap
+- Nominatim Reverse Geocoding
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
