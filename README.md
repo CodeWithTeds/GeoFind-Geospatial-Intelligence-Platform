@@ -1,6 +1,4 @@
-<p align="center">
-    <img src="https://raw.githubusercontent.com/CesiumGS/cesium/main/Apps/Sandcastle/images/Cesium_Logo_Color.jpg" width="180" alt="GeoFind Logo">
-</p>
+
 
 <h1 align="center">GeoFind</h1>
 
